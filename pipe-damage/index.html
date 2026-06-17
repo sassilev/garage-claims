@@ -20,7 +20,7 @@
 <style>
   :root{
     --navy:#102934; --navy-2:#0B1E26; --cyan:#55B5CF; --cyan-d:#2E8AA6;
-    --gold:#D39B3B; --gold-d:#B07E26; --orange:#E87A2C;
+    --gold:#D39B3B; --gold-d:#B07E26; --orange:#D39B3B;
     --ink:#102934; --muted:#5C7178; --bg:#FFFFFF; --bg-grey:#F4F7F8; --bg-blue:#E9F3F6;
     --line:#D9E4E8; --radius:18px;
     --shadow:0 22px 46px -28px rgba(16,41,52,.30); --shadow-sm:0 10px 26px -18px rgba(16,41,52,.30);
@@ -46,6 +46,8 @@
   .btn-white{background:#fff;color:var(--navy)}.btn-white:hover{background:#E9F3F6}
   .btn-wa{background:#fff;color:var(--navy);border-color:var(--navy)}.btn-wa:hover{background:var(--navy);color:#fff}
   .btn-wa svg{fill:#25D366}
+  .btn-orange{background:var(--gold);color:#fff}.btn-orange:hover{background:var(--gold-d);box-shadow:0 14px 28px -14px rgba(211,155,59,.85)}
+  .btn-line{background:#fff;color:var(--navy);border-color:var(--line)}.btn-line:hover{border-color:var(--navy)}
 
   /* nav */
   .nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
@@ -53,41 +55,103 @@
   .nav .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:17px}
   .nav .brand .mk{width:38px;height:38px;border-radius:9px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:900;font-size:18px;flex:none}
   .nav .brand small{display:block;font-weight:500;font-size:11px;color:var(--muted);letter-spacing:.1em}
-  .nav-cta{display:flex;align-items:center;gap:12px}
+  .nav-links{display:flex;align-items:center;gap:26px;margin-inline:auto}
+  .nav-links a{font-weight:600;font-size:15px;color:var(--navy);position:relative;padding:4px 0;transition:color .2s}
+  .nav-links a::after{content:"";position:absolute;inset-block-end:-2px;inset-inline:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:center;transition:transform .22s}
+  .nav-links a:hover{color:var(--gold-d)}
+  .nav-links a:hover::after{transform:scaleX(1)}
+  .nav-cta{display:flex;align-items:center;gap:14px}
   .nav-phone{font-weight:800;color:var(--navy)}
-  .nav-cta .btn{padding:10px 16px;font-size:14px;min-height:auto}
-  @media(max-width:820px){.nav-phone,.nav .btn-ghost{display:none}}
+  .nav-cta .btn{padding:10px 18px;font-size:14px;min-height:auto}
+  @media(max-width:1080px){.nav-links{display:none}}
+  @media(max-width:820px){.nav-phone{display:none}}
 
   /* hero */
-  .hero{position:relative;background:var(--bg-grey);overflow:hidden;border-bottom:1px solid var(--line)}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;align-items:stretch;min-height:660px}
-  @media(max-width:920px){.hero-grid{grid-template-columns:1fr;min-height:0}}
-  .hero-copy{padding:clamp(40px,6vw,84px) clamp(24px,5vw,64px);display:flex;flex-direction:column;justify-content:center;max-width:760px;margin-inline-start:auto;width:100%}
-  .hero-eyebrow{color:var(--gold);font-weight:800;font-size:13px;letter-spacing:.12em;margin-bottom:16px}
-  .hero h1{font-size:clamp(2.5rem,6vw,5.4rem);letter-spacing:-.01em}
-  .hero .lead{color:var(--muted);max-width:560px;margin:22px 0 0;font-size:clamp(16px,2vw,19px);font-weight:400}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);min-height:clamp(560px,70vh,720px);display:flex;align-items:center;background:#0B1E26}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;transform:scale(1.1)}
+  .hero-scrim{position:absolute;inset:0;background:linear-gradient(to left,rgba(247,250,251,.97) 0%,rgba(247,250,251,.93) 30%,rgba(247,250,251,.74) 48%,rgba(247,250,251,.30) 66%,rgba(247,250,251,0) 82%)}
+  .hero .wrap{position:relative;z-index:2;width:100%}
+  .hero-copy{max-width:620px;margin-inline-end:auto;padding:clamp(36px,5vw,56px) 0}
+  .hero-eyebrow{color:var(--gold-d);font-weight:800;font-size:13px;letter-spacing:.12em;margin-bottom:16px}
+  .hero h1{font-size:clamp(2.2rem,5vw,4.4rem);letter-spacing:-.01em}
+  .hero .lead{color:#33474E;max-width:560px;margin:22px 0 0;font-size:clamp(16px,2vw,19px);font-weight:400}
   .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
   @media(max-width:560px){.hero-cta{flex-direction:column}.hero-cta .btn{width:100%}}
-  .trust-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-  .trust{display:flex;gap:11px;align-items:center}
-  .trust .ti{width:42px;height:42px;border-radius:11px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;color:var(--gold);flex:none}
-  .trust b{display:block;font-weight:800;font-size:14.5px;color:var(--navy)}
-  .trust span{color:var(--muted);font-size:12.5px}
-  .hero-media{position:relative;background:linear-gradient(160deg,#16323F 0%,#0B1E26 100%);overflow:hidden;min-height:340px}
-  .hero-media .scene{position:absolute;inset:0;width:100%;height:100%}
-  .hero-media .mglow{position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(85,181,207,.4),transparent 70%);top:-80px;left:-60px;filter:blur(30px)}
+  .hero-trust-line{margin-top:28px;color:#33474E;font-size:14px;font-weight:600;display:flex;flex-wrap:wrap;align-items:center}
+  .hero-trust-line span{display:inline-flex;align-items:center;gap:7px}
+  .hero-trust-line span svg{color:var(--gold-d)}
+  .hero-trust-line span:not(:last-child)::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 14px}
+  @media(max-width:920px){
+    .hero{min-height:0;align-items:stretch;flex-direction:column}
+    .hero-img{position:relative;height:clamp(220px,52vw,360px);transform:none}
+    .hero-scrim{display:none}
+    .hero .wrap{background:var(--bg-grey)}
+    .hero-copy{max-width:none;padding:clamp(32px,7vw,48px) 0}
+  }
 
   /* sections */
   .sec{padding:clamp(64px,9vw,128px) 0;position:relative}
+  .sec-sm{padding:clamp(48px,6vw,80px) 0}
   .bg-grey{background:var(--bg-grey)} .bg-blue{background:var(--bg-blue)} .bg-navy{background:var(--navy);color:#fff}
   .sec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;margin-bottom:clamp(34px,5vw,52px)}
-  .sec-head-t{max-width:700px}
+  .sec-head-t{max-width:720px}
+  .sec-head.center{justify-content:center;text-align:center}
+  .sec-head.center .sec-head-t{max-width:760px;margin:0 auto}
   .eyebrow{color:var(--gold);font-weight:800;font-size:13px;letter-spacing:.12em}
   .sec-title{font-size:clamp(2rem,4vw,3.4rem);margin-top:10px}
-  .sec-sub{color:var(--muted);margin-top:14px;font-size:clamp(16px,2vw,18px);max-width:620px}
+  .sec-sub{color:var(--muted);margin-top:14px;font-size:clamp(16px,2vw,18px);max-width:640px}
+  .sec-head.center .sec-sub{margin-inline:auto}
   .bg-navy .sec-title,.bg-navy .sec-sub{color:#fff}.bg-navy .sec-sub{color:#B9CCD2}
   .sec-num{font-family:'Secular One';font-size:clamp(64px,9vw,128px);color:transparent;-webkit-text-stroke:2px var(--gold);line-height:.78;flex:none;opacity:.9}
   @media(max-width:620px){.sec-num{font-size:58px}}
+
+  /* feature image band */
+  .feature{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .feature img{display:block;width:100%;height:clamp(200px,28vw,320px);object-fit:cover}
+  .feature .cap{position:absolute;inset-block-end:0;inset-inline:0;background:linear-gradient(to top,rgba(11,30,38,.88) 0%,rgba(11,30,38,.45) 55%,transparent 100%);color:#fff;padding:clamp(28px,5vw,44px) clamp(24px,4vw,40px) clamp(20px,3vw,28px)}
+  .feature .cap small{display:block;color:var(--cyan);font-weight:800;font-size:13px;letter-spacing:.1em;margin-bottom:6px}
+  .feature .cap b{font-weight:800;font-size:clamp(17px,2.4vw,23px);color:#fff;line-height:1.3;display:block;max-width:640px}
+
+  /* audience split */
+  .aud{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:680px){.aud{grid-template-columns:1fr}}
+  .aud-card{position:relative;display:flex;flex-direction:column;gap:6px;background:#fff;border:2px solid var(--line);border-radius:var(--radius);padding:clamp(26px,3vw,36px);cursor:pointer;transition:transform .25s,box-shadow .25s,border-color .25s;text-align:right;width:100%;font-family:inherit}
+  .aud-card:hover{border-color:var(--cyan);box-shadow:var(--shadow);transform:translateY(-5px)}
+  .aud-card .ai{width:58px;height:58px;border-radius:15px;background:var(--bg-blue);color:var(--cyan-d);display:grid;place-items:center;margin-bottom:10px}
+  .aud-card h3{font-size:clamp(20px,2.6vw,25px)}
+  .aud-card p{color:var(--muted);font-size:15.5px}
+  .aud-card .go{color:var(--gold-d);font-weight:800;font-size:15px;margin-top:8px}
+
+  /* stats bar */
+  .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:clamp(30px,4vw,46px)}
+  @media(max-width:760px){.stats-bar{grid-template-columns:1fr 1fr}}
+  .stat-b{text-align:center;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 16px;box-shadow:var(--shadow-sm)}
+  .stat-b .n{font-family:'Secular One';font-size:clamp(28px,4vw,40px);color:var(--cyan-d);line-height:1}
+  .stat-b .l{color:var(--muted);font-size:13.5px;margin-top:8px;line-height:1.4}
+
+  /* results / social proof */
+  .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  @media(max-width:1000px){.results-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.results-grid{grid-template-columns:1fr}}
+  .rcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .rcard::before{content:"";position:absolute;top:0;right:0;left:0;height:4px;background:linear-gradient(90deg,var(--cyan),var(--gold))}
+  .rcard .tag{align-self:flex-start;background:var(--bg-blue);color:var(--cyan-d);font-weight:800;font-size:12px;border-radius:999px;padding:5px 12px;margin-bottom:14px}
+  .rcard .ba{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 12px}
+  .rcard .ba .from{color:var(--muted);text-decoration:line-through;font-weight:700;font-size:15px}
+  .rcard .ba .arr{color:var(--cyan);font-weight:900}
+  .rcard .ba .to{font-family:'Secular One';font-size:26px;color:var(--gold-d);line-height:1}
+  .rcard p{color:var(--muted);font-size:14.5px;flex:1}
+  .results-disc{margin-top:20px;color:var(--muted);font-size:13px;line-height:1.7}
+
+  /* urgency strip */
+  .urg{display:flex;gap:12px;align-items:center;justify-content:center;background:var(--navy);color:#fff;border-radius:14px;padding:15px 22px;margin-bottom:24px;font-weight:600;font-size:15px;flex-wrap:wrap;text-align:center}
+  .urg svg{color:var(--gold);flex:none}
+  .urg b{color:var(--gold)}
+
+  /* wizard helper note */
+  .wiz-note{background:var(--bg-blue);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:16px;color:var(--navy);font-size:14.5px;display:flex;gap:11px;align-items:flex-start}
+  .wiz-note svg{color:var(--cyan-d);flex:none;margin-top:2px}
+  .wiz-note b{color:var(--navy)}
 
   /* cards grid */
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -99,8 +163,9 @@
   .card-title{font-size:21px;font-weight:800;margin:4px 0 9px}
   .card-body{color:var(--muted);font-size:15.5px;flex:1}
   /* claim cards with letter badge */
-  .claim .card-badge{position:absolute;top:24px;left:24px;width:48px;height:48px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center}
-  .claim .clet{position:absolute;top:30px;left:80px;font-family:'Secular One';color:var(--gold);font-size:22px}
+  .claim .card-badge{position:static;width:48px;height:48px;border-radius:50%;background:var(--navy);color:#fff;display:inline-grid;place-items:center;vertical-align:middle}
+  .claim .clet{position:static;display:inline-block;vertical-align:middle;margin-inline-start:12px;font-family:'Secular One';color:var(--gold);font-size:26px;line-height:1}
+  .claim .card-title{margin-top:16px!important}
 
   /* process flow */
   .flow{display:flex;align-items:flex-start;gap:6px;justify-content:space-between;margin-top:6px}
@@ -122,6 +187,48 @@
   .duo p{color:#B9CCD2;font-size:15px;margin-top:5px}
   .duo .damt{color:var(--gold);font-weight:800}
 
+  /* legal explainer */
+  .lcards{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:820px){.lcards{grid-template-columns:1fr}}
+  .lcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;box-shadow:var(--shadow-sm);position:relative}
+  .lcard h3{font-size:21px;margin-bottom:10px;display:flex;align-items:center;gap:11px}
+  .lcard h3 .lic{width:44px;height:44px;border-radius:12px;background:var(--bg-blue);color:var(--cyan-d);display:grid;place-items:center;flex:none}
+  .lcard p{color:var(--muted);font-size:15.5px}
+  .lcard .llist{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:9px}
+  .lcard .llist li{display:flex;gap:10px;align-items:flex-start;color:#3C5159;font-size:15px}
+  .lcard .llist svg{color:var(--gold);flex:none;margin-top:3px}
+  .lcard .em{background:var(--bg-blue);border-inline-start:3px solid var(--cyan);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:15px;color:var(--navy)}
+  .ltable-wrap{margin-top:26px;overflow-x:auto;border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1px solid var(--line)}
+  .ltable{width:100%;min-width:560px;border-collapse:collapse;background:#fff}
+  .ltable th,.ltable td{padding:15px 18px;text-align:right;font-size:15px;border-bottom:1px solid var(--line);vertical-align:top}
+  .ltable thead th{background:var(--navy);color:#fff;font-weight:700;font-size:14px;border-bottom:none}
+  .ltable tbody tr:last-child td{border-bottom:none}
+  .ltable td:first-child{font-weight:800;color:var(--navy)}
+  .ltable td .who{display:flex;align-items:center;gap:9px}
+  .ltable .wb{width:30px;height:30px;border-radius:8px;background:var(--bg-blue);color:var(--cyan-d);display:grid;place-items:center;flex:none}
+  .lnote{margin-top:16px;color:var(--muted);font-size:14.5px;display:flex;gap:9px;align-items:flex-start}
+  .lnote svg{color:var(--gold);flex:none;margin-top:2px}
+
+  /* attorney */
+  .atty-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(30px,5vw,60px);align-items:center}
+  @media(max-width:820px){.atty-grid{grid-template-columns:1fr}}
+  .atty-photo{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:linear-gradient(160deg,#16323F,#0B1E26);aspect-ratio:4/5;max-width:420px;margin-inline:auto;width:100%}
+  .atty-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+  .atty-photo .seal{position:absolute;inset-block-end:14px;inset-inline-start:14px;background:rgba(255,255,255,.96);border-radius:12px;padding:8px 12px 8px 10px;display:flex;align-items:center;gap:9px;box-shadow:var(--shadow-sm)}
+  .atty-photo .seal .dot{width:34px;height:34px;border-radius:50%;background:var(--gold);color:#fff;display:grid;place-items:center;font-family:'Secular One';font-size:13px;flex:none}
+  .atty-photo .seal b{font-size:12.5px;color:var(--navy);font-weight:800;line-height:1.25}
+  .atty-photo .seal span{display:block;font-size:11px;color:var(--muted);font-weight:600}
+  .atty-role{color:var(--cyan-d);font-weight:800;font-size:16px;margin-top:8px}
+  .atty-grid p{color:var(--muted);font-size:16.5px;margin-top:15px}
+  .atty-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+  @media(max-width:560px){.atty-stats{grid-template-columns:1fr}}
+  .atty-stat{display:flex;gap:12px;align-items:flex-start;background:var(--bg-grey);border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+  .atty-stat .si{width:38px;height:38px;border-radius:10px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;color:var(--gold-d);flex:none}
+  .atty-stat b{display:block;font-size:14.5px;color:var(--navy);font-weight:800}
+  .atty-stat .t{font-size:12.5px;color:var(--muted)}
+  .atty-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+  @media(max-width:520px){.atty-cta{flex-direction:column}.atty-cta .btn{width:100%}}
+
   /* wizard */
   .wizard{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
   .wiz-top{background:var(--navy);color:#fff;padding:24px clamp(22px,4vw,40px)}
@@ -130,7 +237,7 @@
   .wiz-meta{color:#A9C6CF;font-size:14px}.wiz-meta b{color:var(--cyan)}
   .wiz-bar{height:6px;background:rgba(255,255,255,.16);border-radius:999px;margin-top:14px;overflow:hidden}
   .wiz-bar span{display:block;height:100%;width:0;background:var(--cyan);transition:width .3s}
-  .wiz-stage{padding:clamp(24px,4vw,40px);min-height:240px}
+  .wiz-stage{padding:clamp(24px,4vw,40px);min-height:230px}
   .step{display:none}.step.active{display:block}
   .q-eyebrow{color:var(--gold);font-weight:800;font-size:13px}
   .q-title{font-size:clamp(20px,3vw,28px);font-weight:800;margin:6px 0 6px}
@@ -146,17 +253,14 @@
   @media(max-width:560px){.field{grid-template-columns:1fr}}
   .inp{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 15px;font-family:inherit;font-size:16px;background:#fff;color:var(--ink)}
   .inp:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 4px rgba(85,181,207,.15)}
-  textarea.inp{min-height:92px;resize:vertical}
-  .filebox{display:block;border:2px dashed var(--line);border-radius:16px;padding:24px;text-align:center;cursor:pointer;background:var(--bg-grey)}
-  .filebox b{display:block;color:var(--navy)}.filebox small{color:var(--muted)}
-  #fileList{list-style:none;margin:10px 0 0;padding:0;font-size:14px;color:var(--muted)}
+  textarea.inp{min-height:82px;resize:vertical}
   .wiz-nav{display:flex;gap:12px;align-items:center;padding:0 clamp(24px,4vw,40px) clamp(24px,4vw,40px);flex-wrap:wrap}
   .wiz-err{color:#C0392B;font-weight:700;font-size:14px}
   .result{display:none;padding:clamp(24px,4vw,40px);border-top:1px solid var(--line)}
   .verdict{border:1px solid var(--line);border-radius:18px;padding:26px;background:var(--bg-grey)}
   .routebadge{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#fff;border-radius:999px;padding:6px 16px;font-weight:800;font-size:13px;margin-bottom:12px}
   #v-title{font-size:23px;font-weight:800}
-  #v-text{color:var(--slate,#3C5159);margin-top:8px;color:#3C5159}
+  #v-text{color:#3C5159;margin-top:8px}
   .feebox{margin-top:18px;border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:#fff}
   .feebox b{color:var(--gold-d);display:block;margin-bottom:6px}
   .feebox .fl{display:flex;justify-content:space-between;gap:12px;font-size:15px;padding:6px 0;border-bottom:1px dashed var(--line)}
@@ -164,6 +268,8 @@
   .reasons{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
   .reasons li{display:flex;gap:10px;align-items:flex-start;color:#3C5159;font-size:15px}
   .result-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .result-note{margin-top:16px;color:var(--muted);font-size:13.5px;display:flex;gap:9px;align-items:flex-start}
+  .result-note svg{color:var(--cyan-d);flex:none;margin-top:2px}
   .copywrap{margin-top:18px}
   #summaryBox{width:100%;min-height:120px;border:1.5px solid var(--line);border-radius:12px;padding:12px;font-family:inherit;font-size:14px;color:var(--ink);background:#fff}
 
@@ -181,12 +287,15 @@
   .price-card.hot .price-amt{color:var(--orange)}.price-card.hot .price-amt small{color:#9FC3CB}
   .price-card.hot p{color:#C2D4DA}
   .price-tag{position:absolute;top:-13px;right:24px;background:var(--gold);color:#fff;font-weight:800;font-size:12px;padding:6px 14px;border-radius:999px}
-  .price-note{margin-top:22px;color:var(--muted);font-size:14px}
+  .risk-note{margin-top:22px;background:var(--bg-blue);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;gap:11px;align-items:flex-start;color:var(--navy);font-size:15px}
+  .risk-note svg{color:var(--cyan-d);flex:none;margin-top:2px}
+  .risk-note b{color:var(--navy)}
+  .price-note{margin-top:16px;color:var(--muted);font-size:13.5px;line-height:1.7}
 
   /* why / clock */
-  .why-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,56px);align-items:center}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,56px);align-items:center}
   @media(max-width:820px){.why-grid{grid-template-columns:1fr}}
-  .clock{width:100%;max-width:280px;margin:0 auto;display:block}
+  .why-img{width:100%;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);display:block;object-fit:cover;aspect-ratio:16/10}
   .why-list{display:grid;gap:14px;margin-top:18px}
   .why-list .w{display:flex;gap:13px;align-items:flex-start}
   .why-list .wi{color:var(--cyan-d);flex:none;margin-top:2px}
@@ -233,166 +342,124 @@
   @media(max-width:820px){.wa-fab{display:none}}
 
   /* reveal */
-  .reveal{opacity:0;transform:translateY(16px)}
-  .reveal.in{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease}
-  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}*{animation:none!important;scroll-behavior:auto!important}}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+  .reveal.in{opacity:1;transform:none}
+  .cards>.reveal:nth-child(2),.price-grid>.reveal:nth-child(2),.lcards>.reveal:nth-child(2),.aud>.reveal:nth-child(2),.results-grid>.reveal:nth-child(2){transition-delay:.08s}
+  .cards>.reveal:nth-child(3),.price-grid>.reveal:nth-child(3),.results-grid>.reveal:nth-child(3){transition-delay:.16s}
+  .results-grid>.reveal:nth-child(4){transition-delay:.24s}
+  .hero-img{will-change:transform}
+  .card,.lcard,.price-card,.feature,.why-img,.atty-photo,.rcard{transition:transform .35s cubic-bezier(.22,.61,.36,1),box-shadow .35s ease}
+  .card:hover,.lcard:hover,.feature:hover,.rcard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.hero-img{transform:none!important}*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <div id="prog"></div>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#"><span class="mk">לב</span><div>ששי לב — משרד עורכי דין<small>ביטוח · נזיקין · נזקי מים</small></div></a>
+    <a class="brand" href="#"><span class="mk">SL</span><div>ששי לב — משרד עורכי דין<small>ביטוח · נזיקין · נזקי מים</small></div></a>
+    <nav class="nav-links" aria-label="ניווט ראשי">
+      <a href="#results">תוצאות</a>
+      <a href="#tool">בדיקת התאמה</a>
+      <a href="#fees">שכר טרחה</a>
+      <a href="#attorney">עו״ד ששי לב</a>
+      <a href="#faq">שאלות נפוצות</a>
+    </nav>
     <div class="nav-cta">
       <a class="nav-phone" href="tel:+972533314144">053-3314144</a>
-      <a class="btn btn-ghost" href="#fees">שכר טרחה</a>
-      <a class="btn btn-gold" href="#tool">בדיקת מסלול</a>
+      <a class="btn btn-gold" href="#tool">בדיקת התאמה</a>
     </div>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-grid">
+  <img class="hero-img" src="img/hero.jpg" alt="נזק מים בדירה: ספרי משפט ופטיש על רצפה מוצפת ונזילה מהתקרה" fetchpriority="high" width="1600" height="900">
+  <div class="hero-scrim"></div>
+  <div class="wrap">
     <div class="hero-copy">
-      <div class="hero-eyebrow reveal">ביטוח · נזיקין · נזקי מים</div>
-      <h1 class="reveal">נזק מים או נזילת צנרת? <span class="gold">כל יום עולה לכם כסף.</span></h1>
-      <p class="lead reveal">נזילה מהשכן, רטיבות בקיר, סירוב של חברת הביטוח או נזק שעדיין פעיל — לכל מצב מסלול משפטי אחר: תביעת ביטוח, תביעה נגד צד שלישי, או צו עשה אצל המפקח על המקרקעין. ענו על כמה שאלות וקבלו את המסלול ואת שכר הטרחה. אנחנו מייצגים את שני צידי המתרס.</p>
+      <div class="hero-eyebrow reveal">נזקי מים · נזילות צנרת · תביעות ביטוח</div>
+      <h1 class="reveal">נזק מים בדירה? קודם עוצרים את הנזק, <span class="gold">אחר כך דורשים את הפיצוי.</span></h1>
+      <p class="lead reveal">נזילה מהשכן, רטיבות מצנרת משותפת או דחייה של חברת הביטוח מחייבות פעולה מהירה ובחירת המסלול המשפטי הנכון. עו״ד ששי לב מייצג בתביעות נזקי מים, ביטוח ונזקי רכוש — מכתבי התראה, תביעות כספיות וצווי עשה לעצירת נזק פעיל.</p>
       <div class="hero-cta reveal">
-        <a class="btn btn-gold" href="#tool">בדקו את המסלול שלכם ←</a>
-        <a class="btn btn-wa" href="https://wa.me/972533314144" target="_blank" rel="noopener" aria-label="שיחת ייעוץ בוואטסאפ"><svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg> שיחת ייעוץ בוואטסאפ</a>
+        <a class="btn btn-gold" href="#tool">בדיקת התאמה ראשונית — ללא עלות ←</a>
+        <a class="btn btn-wa" href="https://wa.me/972533314144" target="_blank" rel="noopener" aria-label="שליחת תמונות ומסמכים בוואטסאפ"><svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg> שליחת תמונות ומסמכים</a>
       </div>
-      <div class="trust-row reveal">
-        <div class="trust"><span class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><div><b>שני הצדדים</b><span>ניזוק ומזיק</span></div></div>
-        <div class="trust"><span class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h6"/></svg></span><div><b>מכתב התראה 1,500 ₪</b><span>הצעד הראשון</span></div></div>
-        <div class="trust"><span class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span><div><b>צו עשה</b><span>לעצירת נזק פעיל</span></div></div>
+      <div class="hero-trust-line reveal">
+        <span>טיפול אישי על ידי עורך דין</span>
+        <span>תמחור ברור מראש</span>
+        <span>ייצוג מול חברות ביטוח, שכנים ונציגויות</span>
       </div>
-    </div>
-    <div class="hero-media reveal" role="img" aria-label="איור נזקי מים בדירה: מים על הרצפה ורטיבות בקיר">
-      <span class="mglow"></span>
-      <svg class="scene" viewBox="0 0 600 660" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-        <defs><linearGradient id="wfloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55B5CF" stop-opacity=".5"/><stop offset="1" stop-color="#55B5CF" stop-opacity="0"/></linearGradient></defs>
-        <g stroke="#3E6E7E" stroke-width="2" opacity=".6"><path d="M70 120 H530"/><path d="M70 120 V520"/><path d="M530 120 V520"/></g>
-        <!-- window -->
-        <rect x="120" y="170" width="150" height="170" rx="6" stroke="#6FA7B8" stroke-width="2.5"/>
-        <path d="M195 170 V340 M120 255 H270" stroke="#6FA7B8" stroke-width="2"/>
-        <!-- wet wall streaks -->
-        <g stroke="#55B5CF" stroke-width="3" stroke-linecap="round" opacity=".85"><path d="M420 130 q6 60 -4 120 q-6 40 6 90"/><path d="M455 140 q8 70 0 150"/><path d="M388 150 q-4 50 6 110"/></g>
-        <!-- dripping -->
-        <circle cx="420" cy="360" r="6" fill="#55B5CF"><animate attributeName="cy" values="345;430;430" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/></circle>
-        <!-- floor water -->
-        <path d="M70 470 q120 -26 230 0 q120 26 230 0 V520 H70 Z" fill="url(#wfloor)"/>
-        <path d="M70 470 q120 -26 230 0 q120 26 230 0" stroke="#55B5CF" stroke-width="3" fill="none"/>
-        <g stroke="#55B5CF" stroke-width="2.4" fill="none" opacity=".8"><path d="M150 500 q60 -12 120 0"/><path d="M330 506 q60 -12 120 0"/></g>
-        <!-- books -->
-        <g transform="translate(360,372)">
-          <rect x="0" y="0" width="150" height="22" rx="3" fill="#0F2731" stroke="#D39B3B" stroke-width="1.5"/>
-          <rect x="6" y="22" width="150" height="22" rx="3" fill="#0F2731" stroke="#D39B3B" stroke-width="1.5"/>
-          <rect x="12" y="44" width="150" height="22" rx="3" fill="#0F2731" stroke="#D39B3B" stroke-width="1.5"/>
-          <line x1="20" y1="11" x2="130" y2="11" stroke="#D39B3B" stroke-width="1.2" opacity=".6"/>
-          <line x1="26" y1="33" x2="136" y2="33" stroke="#D39B3B" stroke-width="1.2" opacity=".6"/>
-          <line x1="32" y1="55" x2="142" y2="55" stroke="#D39B3B" stroke-width="1.2" opacity=".6"/>
-        </g>
-        <!-- gavel -->
-        <g transform="translate(150,395) rotate(-18)" stroke="#D39B3B" stroke-width="3.2" stroke-linecap="round" fill="#0F2731">
-          <rect x="0" y="0" width="78" height="34" rx="8"/>
-          <line x1="20" y1="34" x2="20" y2="70"/>
-          <rect x="6" y="70" width="28" height="10" rx="3"/>
-          <line x1="78" y1="17" x2="120" y2="17"/>
-        </g>
-      </svg>
     </div>
   </div>
 </section>
-<!-- SEC 01: TWO SIDES -->
-<section class="sec" id="sides">
+
+<!-- AUDIENCE SPLIT -->
+<section class="sec sec-sm bg-grey" id="start">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <div class="sec-head-t"><span class="eyebrow">נתחיל מהמצב שלכם</span><h2 class="sec-title">באיזה צד אתם נמצאים?</h2><p class="sec-sub">בחרו את המצב שלכם — ונתאים לכם את הבדיקה ואת הצעדים הנכונים.</p></div>
+    </div>
+    <div class="aud">
+      <button class="aud-card reveal" type="button" onclick="startWizard('nizok')">
+        <span class="ai"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9 20v-6h6v6"/></svg></span>
+        <h3>נגרם לי נזק מים</h3>
+        <p>נזילה, רטיבות או הצפה פגעו בדירה, בתכולה או בעסק — ואתם רוצים לעצור את הנזק ולפעול לקבלת הפיצוי המגיע מחברת הביטוח, מהשכן או משניהם.</p>
+        <span class="go">התחילו כאן — בדיקת התאמה ←</span>
+      </button>
+      <button class="aud-card reveal" type="button" onclick="startWizard('mazik')">
+        <span class="ai"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <h3>קיבלתי דרישה או תביעה</h3>
+        <p>שכן, ועד בית או חברת ביטוח טוענים שאתם אחראים לנזק ודורשים תיקון או תשלום — ואתם צריכים לבחון את האחריות ולנהל הגנה מסודרת.</p>
+        <span class="go">התחילו כאן — בדיקת התאמה ←</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTES (short) -->
+<section class="sec" id="types">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-head-t"><span class="eyebrow">שני צידי המתרס</span><h2 class="sec-title">ניזוק או מזיק? אנחנו איתכם בכל מקרה</h2><p class="sec-sub">נזקי מים הם תמיד סיפור של שני צדדים. המשרד מייצג הן את מי שנגרם לו נזק והן את מי שמואשם שגרם לו — עם אותה מקצועיות, ומתוך היכרות עם טענות שני הצדדים.</p></div>
+      <div class="sec-head-t"><span class="eyebrow">שלושת המסלולים</span><h2 class="sec-title">שלושה מסלולים, שלושה פתרונות — לבחור נכון</h2><p class="sec-sub">נזקי מים אינם נופלים לקטגוריה אחת. זיהוי המסלול הנכון מההתחלה חוסך זמן, כסף ונזק נמשך.</p></div>
       <span class="sec-num">01</span>
     </div>
     <div class="cards">
-      <div class="card reveal"><span class="card-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9 20v-6h6v6"/></svg></span><h3 class="card-title">הניזוק</h3><div class="card-eyebrow">נגרם לכם נזק מים</div><p class="card-body" style="margin-top:8px">רטיבות, נזילה או הצפה פגעו בדירה, בתכולה או בעסק. המטרה: לעצור את הנזק ולמצות פיצוי מלא — מחברת הביטוח, מהשכן או משניהם.</p></div>
-      <div class="card reveal"><span class="card-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span><h3 class="card-title">המזיק</h3><div class="card-eyebrow">טוענים שאתם גרמתם</div><p class="card-body" style="margin-top:8px">שכן או ועד בית דורשים מכם תיקון או פיצוי. המטרה: לבחון את האחריות באמת, להפעיל את הביטוח שלכם, ולנהל הגנה מסודרת מול הדרישה.</p></div>
-      <div class="card reveal"><span class="card-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4"/><path d="M12 17h.01"/></svg></span><h3 class="card-title">לא בטוח</h3><div class="card-eyebrow">עדיין לא ברור</div><p class="card-body" style="margin-top:8px">לא יודעים מי אחראי או מול מי לפעול? בדיוק בשביל זה בנינו את בדיקת המסלול — כמה שאלות, ותקבלו תמונה ברורה.</p></div>
+      <div class="card claim reveal"><span class="card-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 0 4 0"/></svg></span><span class="clet">א׳</span><h3 class="card-title">תביעה נגד חברת הביטוח</h3><p class="card-body">נזק מים מכוסה בפוליסת מבנה או תכולה, אך התביעה נדחתה, שולמה בחלקה או מתעכבת. תביעה כספית מול המבטחת מכוח חוק חוזה הביטוח, תום הלב וחובת ההנמקה.</p></div>
+      <div class="card claim reveal"><span class="card-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13A4 4 0 0 1 16 11"/></svg></span><span class="clet">ב׳</span><h3 class="card-title">תביעה נגד שכן / צד שלישי</h3><p class="card-body">הנזילה מקורה אצל שכן או גורם אחר. ניתן לתבוע אותו ישירות — בין אם יש לו ביטוח ובין אם לא — בעוולת רשלנות ומטרד, להשבת מלוא הנזק.</p></div>
+      <div class="card claim reveal"><span class="card-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 21h14"/><path d="m6 8-3 6h6Z"/><path d="m18 8-3 6h6Z"/><path d="M6 8h12"/></svg></span><span class="clet">ג׳</span><h3 class="card-title">צו עשה אצל המפקח על המקרקעין</h3><p class="card-body">נזילה או חלחול מים משכן או מצנרת משותפת בבית משותף. ניתן לדרוש צו עשה — חיוב לתקן ולעצור את הנזק — בפני המפקח על המקרקעין.</p></div>
     </div>
   </div>
 </section>
 
-<!-- SEC 02: CLAIM TYPES -->
-<section class="sec bg-blue" id="types">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-head-t"><span class="eyebrow">סוגי התביעות</span><h2 class="sec-title">שלושה מסלולים, מטרה אחת לפתור</h2><p class="sec-sub">נזקי מים אינם נופלים לקטגוריה אחת. זיהוי המסלול הנכון מההתחלה הוא שחוסך זמן, כסף ונזק נמשך.</p></div>
-      <span class="sec-num">02</span>
-    </div>
-    <div class="cards">
-      <div class="card claim reveal"><span class="card-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 0 4 0"/></svg></span><span class="clet">א׳</span><h3 class="card-title" style="margin-top:6px">תביעה נגד חברת הביטוח</h3><p class="card-body">נזק מים מכוסה בפוליסת מבנה או תכולה, אך התביעה נדחתה, שולמה בחלקה או מתעכבת. תביעה כספית מול המבטחת מכוח חוק חוזה הביטוח, תום הלב וחובת ההנמקה.</p></div>
-      <div class="card claim reveal"><span class="card-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13A4 4 0 0 1 16 11"/></svg></span><span class="clet">ב׳</span><h3 class="card-title" style="margin-top:6px">תביעה נגד שכן / צד שלישי</h3><p class="card-body">הנזילה מקורה אצל שכן או גורם אחר. ניתן לתבוע אותו ישירות — בין אם יש לו ביטוח ובין אם לא — בעוולת רשלנות ומטרד, להשבת מלוא הנזק.</p></div>
-      <div class="card claim reveal"><span class="card-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 21h14"/><path d="m6 8-3 6h6Z"/><path d="m18 8-3 6h6Z"/><path d="M6 8h12"/></svg></span><span class="clet">ג׳</span><h3 class="card-title" style="margin-top:6px">צו עשה אצל המפקח על המקרקעין</h3><p class="card-body">נזילה או חלחול מים משכן או מצנרת משותפת בבית משותף. ניתן לדרוש צו עשה — חיוב לתקן ולעצור את הנזק — בפני המפקח על המקרקעין.</p></div>
-    </div>
-  </div>
-</section>
-<!-- SEC 03: PROCESS -->
-<section class="sec" id="process">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-head-t"><span class="eyebrow">מסלול הפעולה</span><h2 class="sec-title">נזק פעיל? קודם עוצרים, אחר כך גובים</h2><p class="sec-sub">כשהמים עדיין זורמים, כל יום מגדיל את הנזק. לכן הסדר נכון: תחילה צו עשה לעצירת הנזק, ובמקביל או לאחריו תביעה כספית להשבת ההפסד. בשני המסלולים הצעד הראשון הוא מכתב התראה.</p></div>
-      <span class="sec-num">03</span>
-    </div>
-    <div class="flow reveal">
-      <div class="flow-step"><div class="flow-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span class="flow-num">1</span></div><h4>זיהוי הבעיה והאחראי</h4><p>מי אחראי ומול מי לפעול</p></div>
-      <span class="flow-arrow">←</span>
-      <div class="flow-step"><div class="flow-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h5"/></svg><span class="flow-num">2</span></div><h4>מכתב התראה</h4><p>דרישה מנומקת בכתב</p></div>
-      <span class="flow-arrow">←</span>
-      <div class="flow-step"><div class="flow-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m14 9-7 7a2 2 0 0 1-3-3l7-7"/><path d="M11 6 9 8"/><path d="m4 14 6 6"/><path d="m15 5 4 4"/><path d="m18 2 4 4-3 3-4-4z"/></svg><span class="flow-num">3</span></div><h4>צו עשה לעצירת הנזק</h4><p>חיוב לתקן מיידית</p></div>
-      <span class="flow-arrow">←</span>
-      <div class="flow-step"><div class="flow-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg><span class="flow-num">4</span></div><h4>תביעה כספית להשבה</h4><p>השבת מלוא ההפסד</p></div>
-    </div>
-    <div class="duo reveal">
-      <div class="d"><span class="di"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h5"/></svg></span><div><h4>מכתב התראה</h4><p>פנייה משפטית מנומקת אל האחראי או אל המבטחת, הדורשת תיקון מיידי או תשלום וקוצבת זמן לפעולה. <span class="damt">1,500 ₪ + מע״מ</span></p></div></div>
-      <div class="d"><span class="di"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span><div><h4>צו עשה לעצירת הנזק</h4><p>אם אין מענה — תביעה לצו עשה אצל המפקח על המקרקעין, לחיוב האחראי לתקן ולעצור את הנזק הנמשך. <span class="damt">7,950 ₪ + מע״מ</span></p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- SEC 04: WIZARD -->
+<!-- WIZARD (4 questions) -->
 <section class="sec bg-blue" id="tool">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-head-t"><span class="eyebrow">בדיקת מסלול</span><h2 class="sec-title">בדקו מהו המסלול הנכון תוך דקה</h2><p class="sec-sub">כמה שאלות קצרות, ותקבלו אינדיקציה ראשונית למסלול המתאים ולשכר הטרחה. התשובות אינן מהוות ייעוץ משפטי.</p></div>
-      <span class="sec-num">04</span>
+    <div class="sec-head center reveal">
+      <div class="sec-head-t"><span class="eyebrow">בדיקת התאמה</span><h2 class="sec-title">בדקו את המסלול שלכם — תוך פחות מדקה</h2><p class="sec-sub">ארבע שאלות קצרות, ותקבלו אינדיקציה ראשונית למסלול המתאים ולשכר הטרחה. ללא עלות וללא התחייבות.</p></div>
     </div>
-<div class="wizard reveal">
+
+    <div class="urg reveal"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b>בנזקי מים מומלץ לפעול במהירות:</b> הנזק עלול להתפשט, ראיות עלולות להיעלם, ולתביעות קבוע מועד התיישנות. פנייה מוקדמת מסייעת לביסוס התיק.</span></div>
+
+    <div class="wizard reveal">
       <div class="wiz-top">
-        <div class="row"><h2 class="disp">בדיקת מסלול — נזקי מים וצנרת</h2><div class="wiz-meta">שאלה <b id="wizStep">1</b> מתוך 8</div></div>
+        <div class="row"><h2 class="disp">בדיקת התאמה — נזקי מים וצנרת</h2><div class="wiz-meta" id="wizMeta">שאלה <b id="wizStep">1</b> מתוך 4</div></div>
         <div class="wiz-bar"><span id="wizFill"></span></div>
       </div>
       <div class="wiz-stage" id="wizStage">
 
         <div class="step active" data-step="1" data-type="single">
-          <div class="q-eyebrow">שאלה 1</div><div class="q-title">מה תפקידכם במקרה?</div>
+          <div class="q-eyebrow">שאלה 1</div><div class="q-title">מה המצב שלכם?</div>
           <div class="q-hint">המשרד מייצג את שני הצדדים.</div>
           <div class="opts" data-single="role">
             <div class="chip" data-val="nizok"><span class="tick"></span>נגרם לי נזק מים</div>
-            <div class="chip" data-val="mazik"><span class="tick"></span>טוענים שאני אחראי לנזק</div>
+            <div class="chip" data-val="mazik"><span class="tick"></span>קיבלתי דרישה / תביעה</div>
             <div class="chip" data-val="unsure"><span class="tick"></span>לא בטוח/ה</div>
           </div>
         </div>
 
         <div class="step" data-step="2" data-type="single">
-          <div class="q-eyebrow">שאלה 2</div><div class="q-title">מול מי מתנהל העניין?</div>
-          <div class="q-hint">מקור הנזילה או הגורם שאיתו יש מחלוקת.</div>
-          <div class="opts" data-single="against">
-            <div class="chip" data-val="insurer"><span class="tick"></span>חברת הביטוח שלי</div>
-            <div class="chip" data-val="neighbor"><span class="tick"></span>שכן / צד שלישי</div>
-            <div class="chip" data-val="building"><span class="tick"></span>צנרת או רכוש משותף בבניין</div>
-            <div class="chip" data-val="unsure"><span class="tick"></span>לא בטוח/ה</div>
-          </div>
-        </div>
-
-        <div class="step" data-step="3" data-type="single">
-          <div class="q-eyebrow">שאלה 3</div><div class="q-title">מה מצב הנזק כרגע?</div>
+          <div class="q-eyebrow">שאלה 2</div><div class="q-title">מה מצב הנזק כרגע?</div>
           <div class="q-hint">נזק פעיל מחייב פעולה מהירה לעצירתו.</div>
           <div class="opts" data-single="active">
             <div class="chip" data-val="active"><span class="tick"></span>נזילה פעילה עכשיו</div>
@@ -401,61 +468,38 @@
           </div>
         </div>
 
-        <div class="step" data-step="4" data-type="multi">
-          <div class="q-eyebrow">שאלה 4</div><div class="q-title">מה התרחש?</div>
-          <div class="q-hint">אפשר לבחור כמה שרלוונטי.</div>
-          <div class="opts" data-multi="issues">
-            <div class="chip" data-val="leak"><span class="tick"></span>נזילת צנרת</div>
-            <div class="chip" data-val="damp"><span class="tick"></span>רטיבות בקיר / בתקרה</div>
-            <div class="chip" data-val="flood"><span class="tick"></span>הצפה</div>
-            <div class="chip" data-val="contents"><span class="tick"></span>נזק לתכולה</div>
-            <div class="chip" data-val="mold"><span class="tick"></span>עובש</div>
-            <div class="chip" data-val="refuse"><span class="tick"></span>סירוב לתקן</div>
-            <div class="chip" data-val="denied"><span class="tick"></span>הביטוח דחה את התביעה</div>
-            <div class="chip" data-val="partial"><span class="tick"></span>הביטוח שילם חלקית</div>
-          </div>
-        </div>
-
-        <div class="step" data-step="5" data-type="single">
-          <div class="q-eyebrow">שאלה 5</div><div class="q-title">מה מצב הביטוח?</div>
-          <div class="q-hint">פוליסת מבנה, תכולה או ביטוח של הצד השני.</div>
-          <div class="opts" data-single="insurance">
-            <div class="chip" data-val="mine"><span class="tick"></span>יש לי פוליסת מבנה / תכולה</div>
-            <div class="chip" data-val="other"><span class="tick"></span>לצד השני יש ביטוח</div>
-            <div class="chip" data-val="none"><span class="tick"></span>אין ביטוח רלוונטי</div>
+        <div class="step" data-step="3" data-type="single">
+          <div class="q-eyebrow">שאלה 3</div><div class="q-title">מהו מקור הנזילה הידוע?</div>
+          <div class="q-hint">הגורם שאיתו מתנהל העניין.</div>
+          <div class="opts" data-single="against">
+            <div class="chip" data-val="insurer"><span class="tick"></span>חברת הביטוח שלי</div>
+            <div class="chip" data-val="neighbor"><span class="tick"></span>שכן / צד שלישי</div>
+            <div class="chip" data-val="building"><span class="tick"></span>צנרת / רכוש משותף בבניין</div>
             <div class="chip" data-val="unsure"><span class="tick"></span>לא בטוח/ה</div>
           </div>
         </div>
 
-        <div class="step" data-step="6" data-type="multi">
-          <div class="q-eyebrow">שאלה 6</div><div class="q-title">אילו ראיות יש ברשותכם?</div>
-          <div class="q-hint">כל פריט מחזק את התיק.</div>
-          <div class="opts" data-multi="evidence">
-            <div class="chip" data-val="expert"><span class="tick"></span>חוות דעת שמאי / אינסטלטור</div>
-            <div class="chip" data-val="photos"><span class="tick"></span>תמונות / וידאו</div>
-            <div class="chip" data-val="inspection"><span class="tick"></span>דוח בדק בית</div>
-            <div class="chip" data-val="chat"><span class="tick"></span>התכתבויות</div>
-            <div class="chip" data-val="policy"><span class="tick"></span>פוליסת הביטוח</div>
-            <div class="chip" data-val="denial"><span class="tick"></span>מכתב דחייה מהמבטחת</div>
+        <div class="step" data-step="4" data-type="single">
+          <div class="q-eyebrow">שאלה 4</div><div class="q-title">מה היקף הנזק המשוער?</div>
+          <div class="q-hint">הערכה גסה מספיקה בשלב זה.</div>
+          <div class="opts" data-single="scope">
+            <div class="chip" data-val="low"><span class="tick"></span>עד 10,000 ₪</div>
+            <div class="chip" data-val="mid"><span class="tick"></span>10,000–50,000 ₪</div>
+            <div class="chip" data-val="high"><span class="tick"></span>מעל 50,000 ₪</div>
+            <div class="chip" data-val="unknown"><span class="tick"></span>עדיין לא יודע/ת</div>
           </div>
         </div>
 
-        <div class="step" data-step="7" data-type="details">
-          <div class="q-eyebrow">שאלה 7</div><div class="q-title">לאן נשלח את האינדיקציה?</div>
-          <div class="q-hint">נשתמש בפרטים כדי לחזור אליכם עם הערכה ראשונית.</div>
+        <div class="step" data-step="5" data-type="details">
+          <div class="q-eyebrow">כמעט סיימנו</div><div class="q-title">לאן נשלח את האינדיקציה?</div>
+          <div class="q-hint">נשתמש בפרטים כדי לחזור אליכם עם הערכה ראשונית — עוד היום.</div>
           <div class="field">
             <input class="inp" id="f-name" placeholder="שם מלא *">
             <input class="inp" id="f-phone" placeholder="טלפון *" inputmode="tel">
             <input class="inp full" id="f-addr" placeholder="כתובת הנכס (לא חובה)">
             <textarea class="inp full" id="f-desc" placeholder="תיאור קצר של הנזק (לא חובה)"></textarea>
           </div>
-        </div>
-
-        <div class="step" data-step="8" data-type="files">
-          <div class="q-eyebrow">שאלה 8 · אחרונה</div><div class="q-title">צירוף מסמכים (לא חובה)</div>
-          <div class="q-hint">חוות דעת, תמונות, פוליסה, מכתב דחייה.</div>
-          <label class="filebox" for="f-files"><b>גררו לכאן קבצים או לחצו לבחירה</b><small>PDF או תמונות — עד כמה קבצים</small><input type="file" id="f-files" multiple style="display:none"></label>
-          <ul id="fileList"></ul>
+          <div class="wiz-note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span><b>מה תקבלו בסיום:</b> אינדיקציה למסלול המתאים, רשימת המסמכים הנדרשים והערכת שכר טרחה. במקרים מתאימים — שיחה ראשונית עם עו״ד. נחזור אליכם עוד היום.</span></div>
         </div>
 
       </div>
@@ -473,51 +517,138 @@
           <ul class="reasons" id="v-reasons" style="margin-top:18px"></ul>
         </div>
         <div class="result-cta">
-          <a class="btn btn-orange" id="mailBtn" href="#">שלחו את הפרטים במייל ←</a>
+          <a class="btn btn-orange" id="mailBtn" href="#">שלחו את הפרטים לעו״ד ←</a>
           <a class="btn btn-wa" href="https://wa.me/972533314144" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg> שלחו הודעה בוואטסאפ</a>
         </div>
+        <div class="result-note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>נחזור אליכם עוד היום עם הערכה ראשונית ורשימת המסמכים הנדרשים. הבדיקה אינה מהווה ייעוץ משפטי.</span></div>
         <div class="copywrap"><div style="font-weight:800;margin-bottom:6px;font-size:13px">סיכום הפנייה (ניתן להעתיק):</div><textarea id="summaryBox" readonly></textarea></div>
       </div>
     </div>
   </div>
+</section>
+
+<!-- RESULTS / SOCIAL PROOF -->
+<section class="sec" id="results">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <div class="sec-head-t"><span class="eyebrow">דוגמאות מתיקים</span><h2 class="sec-title">דוגמאות מתיקים שטופלו במשרד</h2><p class="sec-sub">להמחשה בלבד — מתיקי נזקי מים אמיתיים. אין באמור הבטחה או אינדיקציה לתוצאה; כל מקרה נבחן לגופו לפי נסיבותיו.</p></div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-b reveal"><div class="n">10+</div><div class="l">שנות ניסיון בדיני ביטוח ונזיקין</div></div>
+      <div class="stat-b reveal"><div class="n">2</div><div class="l">צידי המתרס — ניזוק ומזיק</div></div>
+      <div class="stat-b reveal"><div class="n">3</div><div class="l">תחומי עיסוק: ביטוח · נזיקין · נזקי רכוש</div></div>
+      <div class="stat-b reveal"><div class="n">D&amp;B</div><div class="l">חותם אמינות עסקית Dun &amp; Bradstreet</div></div>
+    </div>
+    <div class="results-grid">
+      <div class="rcard reveal"><span class="tag">תביעת ביטוח</span><div class="ba"><span class="from">27,000 ₪</span><span class="arr">←</span><span class="to">168,000 ₪</span></div><p>חברת הביטוח הציעה 27,000 ₪. לאחר ניהול התביעה נסגר התיק בכ-168,000 ₪.</p></div>
+      <div class="rcard reveal"><span class="tag">דחיית כיסוי</span><div class="ba"><span class="from">נדחתה</span><span class="arr">←</span><span class="to">124,000 ₪</span></div><p>הביטוח דחה כיסוי בטענה לנזקים קודמים. לאחר ניהול ההליך שולם מלוא הנזק — כ-124,000 ₪.</p></div>
+      <div class="rcard reveal"><span class="tag">מינוי מומחה</span><div class="ba"><span class="from">47,500 ₪</span><span class="arr">←</span><span class="to">223,000 ₪</span></div><p>הביטוח שילם 47,500 ₪. לאחר מינוי מומחה מטעם בית המשפט וניהול הליך — כ-223,000 ₪.</p></div>
+      <div class="rcard reveal"><span class="tag">צו עשה</span><div class="ba"><span class="to" style="font-size:21px">פסק דין · צו עשה</span></div><p>לקוחה סבלה שנים מאיטום לקוי בגג השכנים. לאחר ניהול הליך ניתן פסק דין לצו עשה לאיטום הגג — והנזילות פסקו.</p></div>
+    </div>
+    <p class="results-disc reveal">* הדוגמאות לעיל הן מתיקים אמיתיים שטופלו במשרד, והסכומים מעוגלים. אין בהן כדי להבטיח או להעיד על תוצאה דומה בתיק אחר — תוצאת כל תיק תלויה בנסיבותיו ונבחנת לגופה. אין באמור התחייבות לתוצאה כלשהי.</p>
   </div>
 </section>
-<!-- SEC 05: FEES -->
-<section class="sec" id="fees">
+
+<!-- BOTH SIDES BAND -->
+<section class="sec sec-sm bg-grey">
+  <div class="wrap">
+    <div class="feature reveal">
+      <img src="img/consult.jpg" alt="עורך דין ולקוחה בוחנים מסמכי תביעה בדירה שניזוקה ממים" loading="lazy">
+      <div class="cap"><small>ייצוג שני הצדדים</small><b>מלווים ניזוקים ומזיקים מול חברות ביטוח, שכנים וועדי בית — מהפנייה הראשונה ועד הפיצוי או ההגנה</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec" id="process">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-head-t"><span class="eyebrow">מסלול הפעולה</span><h2 class="sec-title">נזק פעיל? קודם עוצרים, אחר כך גובים</h2><p class="sec-sub">כשהמים עדיין זורמים, כל יום מגדיל את הנזק. הסדר הנכון: תחילה צו עשה לעצירת הנזק, ובמקביל או לאחריו תביעה כספית להשבת ההפסד. בשני המסלולים הצעד הראשון הוא מכתב התראה.</p></div>
+      <span class="sec-num">02</span>
+    </div>
+    <div class="feature reveal" style="margin-bottom:clamp(30px,4.5vw,46px)">
+      <img src="img/drying.jpg" alt="מאווררים ומייבש אוויר מייבשים דירה לאחר נזק מים" loading="lazy">
+      <div class="cap"><small>נזק פעיל</small><b>כשהמים עדיין זורמים — קודם עוצרים את הנזק בצו עשה, ובמקביל גובים את ההפסד</b></div>
+    </div>
+    <div class="flow reveal">
+      <div class="flow-step"><div class="flow-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span class="flow-num">1</span></div><h4>זיהוי הבעיה והאחראי</h4><p>מי אחראי ומול מי לפעול</p></div>
+      <span class="flow-arrow">←</span>
+      <div class="flow-step"><div class="flow-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h5"/></svg><span class="flow-num">2</span></div><h4>מכתב התראה</h4><p>דרישה מנומקת בכתב</p></div>
+      <span class="flow-arrow">←</span>
+      <div class="flow-step"><div class="flow-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m14 9-7 7a2 2 0 0 1-3-3l7-7"/><path d="M11 6 9 8"/><path d="m4 14 6 6"/><path d="m15 5 4 4"/><path d="m18 2 4 4-3 3-4-4z"/></svg><span class="flow-num">3</span></div><h4>צו עשה לעצירת הנזק</h4><p>חיוב לתקן מיידית</p></div>
+      <span class="flow-arrow">←</span>
+      <div class="flow-step"><div class="flow-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg><span class="flow-num">4</span></div><h4>תביעה כספית להשבה</h4><p>השבת מלוא ההפסד</p></div>
+    </div>
+    <div class="duo reveal">
+      <div class="d"><span class="di"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h5"/></svg></span><div><h4>מכתב התראה</h4><p>פנייה משפטית מנומקת אל האחראי או אל המבטחת, הדורשת תיקון מיידי או תשלום וקוצבת זמן לפעולה. <span class="damt">1,500 ₪ + מע״מ</span></p></div></div>
+      <div class="d"><span class="di"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span><div><h4>צו עשה לעצירת הנזק</h4><p>אם אין מענה — תביעה לצו עשה אצל המפקח על המקרקעין, לחיוב האחראי לתקן ולעצור את הנזק הנמשך. <span class="damt">7,950 ₪ + מע״מ</span></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEES -->
+<section class="sec bg-grey" id="fees">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-head-t"><span class="eyebrow">שכר טרחה</span><h2 class="sec-title">תמחור ברור, ללא הפתעות</h2><p class="sec-sub">שכר הטרחה נקבע לפי המסלול. כל הסכומים אינם כוללים מע״מ, אגרת בית משפט ושכר מומחה, וכפופים להסכם שכר טרחה פרטני.</p></div>
-      <span class="sec-num">05</span>
+      <span class="sec-num">03</span>
     </div>
     <div class="price-grid">
       <div class="price-card reveal"><span class="pe">צעד ראשון</span><h3>מכתב התראה</h3><div class="price-amt">1,500<small> ₪ + מע״מ</small></div><p>פנייה משפטית מנומקת הדורשת תיקון או תשלום וקוצבת זמן. פעמים רבות פותרת את הסכסוך עוד לפני הגשת תביעה.</p></div>
       <div class="price-card hot reveal"><span class="price-tag">הפתרון המומלץ</span><span class="pe">לעצירת נזק פעיל</span><h3>תביעה לצו עשה</h3><div class="price-amt">7,950<small> ₪ + מע״מ</small></div><p>הגשת תביעה לצו עשה אצל המפקח על המקרקעין, לחיוב האחראי לתקן ולעצור את הנזק הנמשך.</p></div>
-      <div class="price-card reveal"><span class="pe">להשבת הנזק</span><h3>תביעת ביטוח / כספית</h3><div class="price-amt">3,750<small> ₪ + מע״מ</small></div><p>פתיחת תיק וניהול תביעה כספית מול המבטחת או הצד האחראי, בתוספת שכר טרחת הצלחה של 15% + מע״מ מכל סכום שייפסק (לא פחות).</p></div>
+      <div class="price-card reveal"><span class="pe">להשבת הנזק</span><h3>תביעת ביטוח / כספית</h3><div class="price-amt">3,750<small> ₪ + מע״מ</small></div><p>דמי פתיחת תיק וניהול תביעה כספית מול המבטחת או הצד האחראי. בנוסף — שכר טרחה מותנה בתוצאה, בהתאם להיקף התיק.</p></div>
     </div>
-    <div class="price-note reveal">* בתביעה הכספית: דמי פתיחת תיק 3,750 ₪ + מע״מ, ובנוסף שכר טרחת הצלחה בשיעור 15% + מע״מ מהסכום הפסוק, ולא פחות מ-15% + מע״מ מסכום הנזק. שכר הטרחה הסופי ייקבע בהסכם פרטני בהתאם לנסיבות התיק.</div>
+    <div class="risk-note reveal"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/><path d="m9 12 2 2 4-4"/></svg><span><b>האינטרס שלנו זהה לשלכם:</b> בתביעה הכספית חלק משכר הטרחה מותנה בתוצאה — אנחנו מצליחים כשאתם מצליחים.</span></div>
+    <p class="price-note reveal">* בתביעה הכספית: דמי פתיחת תיק 3,750 ₪ + מע״מ, ובנוסף שכר טרחה מותנה בתוצאה בהתאם להיקף התיק. מנגנון שכר הטרחה המלא ייקבע בהסכם שכר טרחה פרטני, לאחר בדיקת התיק. כל מקרה נבחן לגופו.</p>
   </div>
 </section>
 
-<!-- SEC 06: WHY LEGAL -->
+<!-- ATTORNEY -->
+<section class="sec" id="attorney">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-head-t"><span class="eyebrow">מי שמייצג אתכם</span><h2 class="sec-title">עו״ד ששי לב</h2><p class="sec-sub">לא רק תיק — אדם אחד שמלווה אתכם מהרגע הראשון ועד התוצאה.</p></div>
+      <span class="sec-num" style="-webkit-text-stroke:2px var(--gold)">SL</span>
+    </div>
+    <div class="atty-grid">
+      <div class="reveal">
+        <div class="atty-photo">
+          <img src="img/attorney.jpg" alt="עו״ד ששי לב — מייסד ובעלים של המשרד" loading="lazy" onerror="this.style.display='none'">
+          <div class="seal"><span class="dot">SL</span><b>חותם אמינות<span>Dun &amp; Bradstreet</span></b></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="atty-role">עוסק בדיני ביטוח, נזיקין ונזקי רכוש · מעל 10 שנות ניסיון</div>
+        <p>עו״ד ששי לב עומד בראש המשרד ועוסק בדיני ביטוח, נזיקין ונזקי רכוש — עם דגש על נזקי מים, נזילות צנרת ותביעות מול חברות ביטוח. המשרד מלווה <b style="color:var(--navy)">ניזוקים ומזיקים כאחד</b>, מהפנייה הראשונה ומכתב ההתראה ועד לפסק הדין או להסדר הפשרה.</p>
+        <p>הגישה במשרד מעשית: זיהוי המסלול המתאים, בניית תשתית ראייתית מסודרת (חוות דעת שמאי ומאתר נזילות), וניהול מו״מ ותביעה לפעולה למיצוי הזכויות. כל תיק מלווה אישית — אתם יודעים בכל שלב מה קורה ולמה.</p>
+        <div class="atty-stats">
+          <div class="atty-stat"><span class="si"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>מעל 10 שנות ניסיון</b><div class="t">בדיני ביטוח ונזיקין</div></div></div>
+          <div class="atty-stat"><span class="si"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span><div><b>שני צידי המתרס</b><div class="t">ייצוג ניזוקים ומזיקים</div></div></div>
+          <div class="atty-stat"><span class="si"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>ליווי אישי</b><div class="t">מהפנייה ועד הפיצוי</div></div></div>
+          <div class="atty-stat"><span class="si"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/><path d="m9 12 2 2 4-4"/></svg></span><div><b>אמינות עסקית</b><div class="t">חותם Dun &amp; Bradstreet</div></div></div>
+        </div>
+        <div class="atty-cta">
+          <a class="btn btn-gold" href="#tool">בדיקת התאמה ראשונית ←</a>
+          <a class="btn btn-wa" href="https://wa.me/972533314144" target="_blank" rel="noopener" aria-label="שיחת ייעוץ בוואטסאפ"><svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg> שיחת ייעוץ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY LEGAL -->
 <section class="sec bg-grey" id="why">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-head-t"><span class="eyebrow">היתרון המשפטי</span><h2 class="sec-title">למה ליווי משפטי בנזקי מים</h2></div>
-      <span class="sec-num">06</span>
+      <span class="sec-num">04</span>
     </div>
     <div class="why-grid">
       <div class="reveal">
-        <svg class="clock" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="110" cy="110" r="92" stroke="#102934" stroke-width="6"/>
-          <circle cx="110" cy="110" r="74" stroke="#D9E4E8" stroke-width="2"/>
-          <g stroke="#102934" stroke-width="4" stroke-linecap="round"><line x1="110" y1="34" x2="110" y2="48"/><line x1="186" y1="110" x2="172" y2="110"/><line x1="110" y1="186" x2="110" y2="172"/><line x1="34" y1="110" x2="48" y2="110"/></g>
-          <line x1="110" y1="110" x2="110" y2="64" stroke="#55B5CF" stroke-width="7" stroke-linecap="round"/>
-          <line x1="110" y1="110" x2="150" y2="126" stroke="#55B5CF" stroke-width="7" stroke-linecap="round"/>
-          <circle cx="110" cy="110" r="8" fill="#D39B3B"/>
-        </svg>
+        <img class="why-img" src="img/clock.jpg" alt="שעון, פטיש שופט ומסמך תהליך על שולחן — הזמן כגורם מכריע בנזקי מים" loading="lazy">
       </div>
       <div class="reveal">
-        <p style="color:var(--muted);font-size:18px">נזק מים נראה כעניין טכני, אבל הוא קודם כל סוגיה משפטית: מי אחראי, מול מי תובעים, ובאיזה מסלול. עו״ד ששי לב מתמחה בדיני ביטוח, נזיקין ונזקי רכוש, ומלווה ניזוקים ומזיקים מול חברות ביטוח, שכנים, ועדי בית, שמאים ובתי משפט. בנזק מים הזמן הוא גורם מכריע — כל יום שעובר מגדיל את הנזק ומחליש את הראיות.</p>
+        <p style="color:var(--muted);font-size:18px">נזק מים נראה כעניין טכני, אבל הוא קודם כל סוגיה משפטית: מי אחראי, מול מי תובעים, ובאיזה מסלול. עו״ד ששי לב עוסק בדיני ביטוח, נזיקין ונזקי רכוש, ומלווה ניזוקים ומזיקים מול חברות ביטוח, שכנים, ועדי בית, שמאים ובתי משפט. בנזק מים הזמן הוא גורם חשוב — ככל שהזמן עובר הנזק עלול לגדול והראיות עלולות להיחלש.</p>
         <div class="why-list">
           <div class="w"><span class="wi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>זיהוי המסלול הנכון</b> — תביעת ביטוח, צד שלישי או צו עשה, מההתחלה ובלי לבזבז זמן.</div></div>
           <div class="w"><span class="wi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>פעולה מהירה בנזק פעיל</b> — צו עשה לעצירת הנזק לפני שהוא גדל, במקביל לתביעה הכספית.</div></div>
@@ -529,12 +660,105 @@
   </div>
 </section>
 
-<!-- SEC 07: FAQ -->
+<!-- LEGAL EXPLAINER (deep info) -->
+<section class="sec" id="legal">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-head-t"><span class="eyebrow">הבסיס המשפטי</span><h2 class="sec-title">מה חשוב לדעת לפני שתובעים — בשפה פשוטה</h2><p class="sec-sub">בלי ז׳רגון: העקרונות שקובעים אם, כמה וממי ניתן לקבל בנזקי מים וצנרת.</p></div>
+      <span class="sec-num" style="-webkit-text-stroke:2px var(--cyan)">§</span>
+    </div>
+    <div class="feature reveal" style="margin-bottom:clamp(30px,4.5vw,46px)">
+      <img src="img/meter.jpg" alt="בדיקת לחות בקיר רטוב לאיתור מקור הנזילה" loading="lazy">
+      <div class="cap"><small>זיהוי המקור</small><b>איתור מוקד הנזילה והאחראי לו — הצעד שקובע באיזה מסלול משפטי לפעול</b></div>
+    </div>
+    <div class="lcards">
+      <div class="lcard reveal">
+        <h3><span class="lic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m14 9-7 7a2 2 0 0 1-3-3l7-7"/><path d="m18 2 4 4-3 3-4-4z"/><path d="m15 5 4 4"/></svg></span>צו עשה — לחייב את האחראי לתקן</h3>
+        <p>צו עשה הוא הוראה של בית המשפט (או של המפקח על המקרקעין בבית משותף) המחייבת את האחראי לבצע פעולה ממשית — בדרך כלל לתקן את הצנרת או לאטום את מקור הנזילה — בנוסף לפיצוי כספי או במקומו. מתאים במיוחד כשהנזק עדיין פעיל ופיצוי כספי לבדו לא יעצור אותו.</p>
+        <ul class="llist">
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>זכות לכאורה</b> — הוכחה ראשונית שהנזק מקורו אצל האחראי.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>צו ספציפי</b> — מה בדיוק צריך לתקן, ולא דרישה כללית.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>מאזן נוחות</b> — הנזק הצפוי לכם כבד מהנזק שייגרם לצד השני.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>ניקיון כפיים</b> — פנייה בתום לב, בלי הסתרת עובדות או שיהוי.</span></li>
+        </ul>
+      </div>
+      <div class="lcard reveal">
+        <h3><span class="lic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5s-3 3.5-3 5.5a7 7 0 0 0 7 7z"/></svg></span>מים כ״דבר נמלט״ — והשפעתו על נטל הראיה</h3>
+        <p>לפי <span class="lawref">סעיף 38 לפקודת הנזיקין</span>, מים עשויים להיחשב ״דבר נמלט״. במקרים המתאימים — לאחר שמוכחים מקור המים והשליטה בהם — עשוי נטל הראיה לעבור אל הצד שממנו נמלטו המים, כך שעליו להראות שלא התרשל.</p>
+        <div class="em"><b>למה זה חשוב לכם:</b> במקרים המתאימים הדבר מקל על הניזוק בהוכחת התביעה. עם זאת, התובע עדיין נדרש להוכיח את עצם הנזק ומקורו, והתקיימות התנאים נבחנת לפי נסיבות כל מקרה.</div>
+        <p style="margin-top:14px">בנוסף, בבית משותף עשויה לחול על בעל דירה — מכוח <span class="lawref">התקנון המצוי שבחוק המקרקעין</span> — חובה לתקן בדירתו פגם שעלול לפגוע בשכנו.</p>
+      </div>
+    </div>
+
+    <p class="sec-sub reveal" style="margin-top:clamp(34px,5vw,48px);margin-bottom:0">בהתאם למקור הנזילה, אפשר לתבוע — לעיתים במקביל — את אחד מאלה:</p>
+    <div class="ltable-wrap reveal">
+      <table class="ltable">
+        <thead><tr><th>את מי תובעים</th><th>על מה מתבססים</th><th>מי צריך להוכיח</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="who"><span class="wb"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/></svg></span>השכן / המזיק</span></td>
+            <td>סעיף 38 + עוולת הרשלנות (פקודת הנזיקין)</td>
+            <td>במקרים המתאימים — הנתבע, שלא התרשל</td>
+          </tr>
+          <tr>
+            <td><span class="who"><span class="wb"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>חברת הביטוח</span></td>
+            <td>חוזה הפוליסה + חובת תום הלב וההנמקה</td>
+            <td>התובע — בכפוף לבדיקת ההחרגות בפוליסה</td>
+          </tr>
+          <tr>
+            <td><span class="who"><span class="wb"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span>נציגות הבית המשותף</span></td>
+            <td>אחריות לצנרת/רכוש משותף + סעיף 38</td>
+            <td>במקרים המתאימים — הנציגות</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lnote reveal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>המפתח בכל המסלולים: <b>חוות דעת מומחה</b> (שמאי או מאתר נזילות) שמאתרת את מקור הנזילה — היא שקובעת במידה רבה את חלוקת האחריות בין הצדדים.</span></p>
+  </div>
+</section>
+
+<!-- EXPERTS -->
+<section class="sec bg-blue" id="experts">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-head-t"><span class="eyebrow">מומחים וראיות</span><h2 class="sec-title">המומחים שמכריעים את התיק</h2><p class="sec-sub">בנזקי צנרת, חוות דעת מקצועית ומוקדמת היא הבסיס לכל תביעה. בלי מומחה מוסמך שיאתר את מקור הנזילה ויאמוד את הנזק — קשה מאוד לבסס תביעה מוצלחת.</p></div>
+      <span class="sec-num" style="-webkit-text-stroke:2px var(--cyan)">★</span>
+    </div>
+    <div class="why-grid">
+      <div class="reveal">
+        <img class="why-img" src="img/experts.webp" alt="מומחה בודק נזילה בצנרת בקיר באמצעות מד לחות ומצלמה תרמית" loading="lazy">
+      </div>
+      <div class="reveal">
+        <p style="color:var(--muted);font-size:17px">לכל שלב בתיק מתאים מומחה אחר — מאיתור מקור הנזילה ועד אומדן הנזק. הפסיקה מדגישה שוב ושוב: <b style="color:var(--navy)">היעדר חוות דעת מתאימה עלול להכשיל את התביעה</b>, גם כשהנזק ברור לעין. לכן בונים את התשתית הראייתית מההתחלה.</p>
+        <div class="why-list">
+          <div class="w"><span class="wi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><div><b>איתור מדויק של המקור</b> — מד לחות ומצלמה תרמית מצביעים על מוצא הנזילה והאחראי לה.</div></div>
+          <div class="w"><span class="wi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-5"/></svg></span><div><b>כימות הנזק</b> — חוות דעת שמאי הקובעת את עלות השיקום, ומהווה בסיס מקצועי לדרישת הפיצוי.</div></div>
+          <div class="w"><span class="wi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>הכרעה במחלוקת</b> — כשחוות הדעת חלוקות, בית המשפט ממנה מומחה מטעמו שמכריע.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="ltable-wrap reveal">
+      <table class="ltable">
+        <thead><tr><th>סוג המומחה</th><th>התפקיד העיקרי</th><th>מתי נדרש</th></tr></thead>
+        <tbody>
+          <tr><td>מאתר נזילות</td><td>איתור מקור הנזילה (מד לחות, מצלמה תרמית)</td><td>תמיד — השלב הראשון</td></tr>
+          <tr><td>שמאי רכוש</td><td>אומדן עלות התיקונים ותיעוד הנזקים</td><td>תמיד — לצורך הפיצוי</td></tr>
+          <tr><td>מהנדס אינסטלציה</td><td>בדיקת תקינות הצנרת ואופן ההתקנה</td><td>במחלוקת על אופן ההתקנה</td></tr>
+          <tr><td>קונסטרוקטור</td><td>בדיקת פגיעה מבנית בתקרה ובקירות</td><td>כשנגרם נזק מבני</td></tr>
+          <tr><td>מומחה מטעם בית המשפט</td><td>הכרעה בין חוות דעת הצדדים</td><td>כשיש פער בין הערכות</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lnote reveal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>אנחנו עובדים עם שמאים, מאתרי נזילות ומהנדסים — ודואגים שחוות הדעת תיערך נכון ובזמן, לפני שהראיות נעלמות.</span></p>
+  </div>
+</section>
+
+<!-- FAQ -->
 <section class="sec bg-navy" id="faq">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-head-t"><span class="eyebrow">שאלות ותשובות</span><h2 class="sec-title">מה שחשוב לדעת על נזקי מים</h2></div>
-      <span class="sec-num" style="-webkit-text-stroke:2px var(--cyan)">07</span>
+      <span class="sec-num" style="-webkit-text-stroke:2px var(--cyan)">05</span>
     </div>
     <div class="faq reveal">
       <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="fa1" id="fq1">נזילת מים מהשכן — את מי תובעים?<span class="pm" aria-hidden="true">+</span></button><div class="faq-a" id="fa1" role="region" aria-labelledby="fq1"><div class="faq-a-in">תלוי במקור ובמצב. ניתן לתבוע את <strong>השכן עצמו</strong> בעוולת רשלנות ומטרד, בין אם יש לו ביטוח ובין אם לא. כאשר מדובר ב<strong>בית משותף</strong> או בצנרת משותפת, ניתן לפנות ל<strong>מפקח על המקרקעין</strong> בבקשה לצו עשה. לעיתים תובעים במקביל גם את חברת הביטוח שלכם וגם את הצד האחראי.</div></div></div>
@@ -542,19 +766,21 @@
       <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="fa3" id="fq3">מה זה צו עשה אצל המפקח על המקרקעין?<span class="pm" aria-hidden="true">+</span></button><div class="faq-a" id="fa3" role="region" aria-labelledby="fq3"><div class="faq-a-in">המפקח על המקרקעין מוסמך לדון בסכסוכים בין בעלי דירות בבית משותף לפי <span class="lawref">חוק המקרקעין, התשכ״ט-1969</span>. צו עשה הוא חיוב שיפוטי של האחראי <strong>לבצע תיקון</strong> — למשל לאטום צנרת או לתקן נזילה — כדי לעצור נזק נמשך. זהו המסלול המהיר כאשר הנזק עדיין פעיל.</div></div></div>
       <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="fa4" id="fq4">הנזק עדיין פעיל — מה עושים קודם?<span class="pm" aria-hidden="true">+</span></button><div class="faq-a" id="fa4" role="region" aria-labelledby="fq4"><div class="faq-a-in">קודם כל <strong>עוצרים את הנזק</strong>. שולחים מכתב התראה הדורש תיקון מיידי, ואם אין מענה מגישים תביעה לצו עשה. במקביל מתעדים את הנזק לצורך התביעה הכספית להשבת ההפסד. סדר פעולה זה מונע החמרה והגדלת הנזק.</div></div></div>
       <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="fa5" id="fq5">אין לשכן ביטוח — אפשר עדיין לתבוע?<span class="pm" aria-hidden="true">+</span></button><div class="faq-a" id="fa5" role="region" aria-labelledby="fq5"><div class="faq-a-in">כן. אחריות בנזיקין אינה תלויה בקיום ביטוח. ניתן לתבוע את השכן <strong>באופן אישי</strong> בעוולת רשלנות ומטרד להשבת מלוא הנזק. היעדר ביטוח אצלו אינו פוטר אותו מאחריות, אם כי הוא משפיע על אופן הגבייה.</div></div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="fa6" id="fq6">אני הצד שמואשם שגרם לנזק — אתם מייצגים גם אותי?<span class="pm" aria-hidden="true">+</span></button><div class="faq-a" id="fa6" role="region" aria-labelledby="fq6"><div class="faq-a-in">בהחלט. המשרד מייצג את <strong>שני צידי המתרס</strong>. כמזיק לכאורה, נבחן את האחריות באמת, נפעיל את פוליסת הביטוח שלכם אם קיימת, וננהל מולכם הגנה מסודרת מול הדרישה או התביעה.</div></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="fa6" id="fq6">אני הצד שמואשם שגרם לנזק — אתם מייצגים גם אותי?<span class="pm" aria-hidden="true">+</span></button><div class="faq-a" id="fa6" role="region" aria-labelledby="fq6"><div class="faq-a-in">בהחלט. המשרד מייצג את <strong>שני צידי המתרס</strong>. כמי שקיבל דרישה או תביעה, נבחן את האחריות לגופה, נפעיל את פוליסת הביטוח שלכם אם קיימת, וננהל מולכם הגנה מסודרת מול הדרישה או התביעה.</div></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="fa7" id="fq7">על מי מוטל נטל ההוכחה בנזקי מים?<span class="pm" aria-hidden="true">+</span></button><div class="faq-a" id="fa7" role="region" aria-labelledby="fq7"><div class="faq-a-in">לפי <span class="lawref">סעיף 38 לפקודת הנזיקין</span>, מים עשויים להיחשב ״דבר נמלט״. במקרים המתאימים, לאחר הוכחת מקור המים והשליטה בהם, עשוי נטל הראיה לעבור אל הצד שממנו נמלטו — כך שעליו להוכיח שלא התרשל. עם זאת, התובע עדיין נדרש להוכיח את עצם הנזק, מקורו והקשר הסיבתי, והתקיימות התנאים נבחנת לגופו של כל מקרה.</div></div></div>
     </div>
   </div>
 </section>
-<!-- SEC: CTA -->
+
+<!-- FINAL CTA -->
 <section class="sec" id="contact" style="padding-bottom:clamp(48px,7vw,90px)">
   <div class="wrap">
     <div class="cta-card reveal">
       <h2>נזק מים? אל תחכו שהוא יגדל</h2>
-      <p>בדיקת מסלול ראשונית ללא עלות וללא התחייבות — נזהה את הבעיה, את הגורם האחראי ואת המסלול המתאים, ונראה לכם כיצד לפעול.</p>
+      <p>בדיקת התאמה ראשונית ללא עלות וללא התחייבות — נזהה את הבעיה, את הגורם האחראי ואת המסלול המתאים, ונראה לכם כיצד לפעול. נחזור אליכם עוד היום.</p>
       <div class="cta-actions">
-        <a class="btn btn-gold" href="#tool">בדקו את המסלול ←</a>
-        <a class="btn btn-white" href="tel:+972533314144">חייגו 053-3314144</a>
+        <a class="btn btn-gold" href="#tool">בדיקת התאמה ראשונית ←</a>
+        <a class="btn btn-white" href="https://wa.me/972533314144" target="_blank" rel="noopener">שליחת תמונות בוואטסאפ</a>
       </div>
     </div>
   </div>
@@ -576,22 +802,36 @@
         <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> לאונרדו דה וינצ׳י 14, תל אביב</span>
       </div>
     </div>
-    <div class="disc"><strong>הבהרה משפטית:</strong> המידע באתר זה כללי ומיועד להעשרה בלבד, אינו מהווה ייעוץ משפטי, חוות דעת או תחליף להם, ואין בו כדי ליצור יחסי עורך דין–לקוח. תוצאת "בדיקת המסלול" היא אינדיקציה ראשונית בלבד המבוססת על הנתונים שהוזנו. הסכומים הנקובים אינם כוללים מע״מ, אגרת בית משפט ושכר מומחה, וכפופים להסכם שכר טרחה פרטני. כל מקרה נבחן לגופו. אין באמור התחייבות לתוצאה כלשהי.</div>
+    <div class="disc"><strong>הבהרה משפטית:</strong> המידע באתר זה כללי ומיועד להעשרה בלבד, אינו מהווה ייעוץ משפטי, חוות דעת או תחליף להם, ואין בו כדי ליצור יחסי עורך דין–לקוח. תוצאת "בדיקת ההתאמה" היא אינדיקציה ראשונית בלבד המבוססת על הנתונים שהוזנו. דוגמאות התוצאות הן מתיקים אמיתיים שטופלו במשרד; כל מקרה נבחן לגופו ואין באמור התחייבות לתוצאה. הסכומים הנקובים אינם כוללים מע״מ, אגרת בית משפט ושכר מומחה, וכפופים להסכם שכר טרחה פרטני.</div>
   </div>
 </footer>
 
-<div class="mbar"><a class="btn btn-gold" href="#tool">בדיקת מסלול</a><a class="btn btn-ghost" href="tel:+972533314144">חייגו</a></div>
+<div class="mbar"><a class="btn btn-gold" href="#tool">בדיקת התאמה</a><a class="btn btn-ghost" href="tel:+972533314144">חייגו</a></div>
 <a class="wa-fab" href="https://wa.me/972533314144" target="_blank" rel="noopener" aria-label="פנייה בוואטסאפ"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg></a>
 <script>
 /* scroll progress */
 window.addEventListener('scroll',function(){var h=document.documentElement;var p=document.getElementById('prog');if(p)p.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
-/* reveal */
+/* reveal + parallax */
 (function(){
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var els=[].slice.call(document.querySelectorAll('.reveal'));
-  if(reduce||!('IntersectionObserver'in window)){els.forEach(function(e){e.classList.add('in');});return;}
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
-  els.forEach(function(e){io.observe(e);});
+  if(reduce||!('IntersectionObserver'in window)){els.forEach(function(e){e.classList.add('in');});}
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+    els.forEach(function(e){io.observe(e);});
+    var heroImg=document.querySelector('.hero-img');
+    if(heroImg&&window.innerWidth>920){
+      var ticking=false;
+      window.addEventListener('scroll',function(){
+        if(ticking)return;ticking=true;
+        window.requestAnimationFrame(function(){
+          var y=window.scrollY;
+          if(y<900){var ty=Math.min(y*0.09,30);heroImg.style.transform='translateY('+ty+'px) scale(1.1)';}
+          ticking=false;
+        });
+      },{passive:true});
+    }
+  }
 })();
 /* accordion (accessible) */
 document.querySelectorAll('.faq-q').forEach(function(btn){
@@ -604,38 +844,49 @@ document.querySelectorAll('.faq-q').forEach(function(btn){
 });
 </script>
 <script>
-var state={role:'',against:'',active:'',insurance:'',issues:[],evidence:[]};
-var pickedFiles=[];
+var state={role:'',active:'',against:'',scope:''};
 var labels={
- role:{nizok:'ניזוק (נגרם לי נזק)',mazik:'מזיק (מואשם באחריות)',unsure:'לא בטוח'},
- against:{insurer:'חברת הביטוח שלי',neighbor:'שכן / צד שלישי',building:'רכוש/צנרת משותפת בבניין',unsure:'לא בטוח'},
+ role:{nizok:'נגרם לי נזק מים',mazik:'קיבלתי דרישה / תביעה',unsure:'לא בטוח'},
  active:{active:'נזילה פעילה עכשיו',stopped:'הופסקה אך הנזק נשאר',done:'אירוע חד-פעמי שהסתיים'},
- insurance:{mine:'יש לי פוליסת מבנה/תכולה',other:'לצד השני יש ביטוח',none:'אין ביטוח רלוונטי',unsure:'לא בטוח'},
- issues:{leak:'נזילת צנרת',damp:'רטיבות בקיר/תקרה',flood:'הצפה',contents:'נזק לתכולה',mold:'עובש',refuse:'סירוב לתקן',denied:'הביטוח דחה תביעה',partial:'הביטוח שילם חלקית'},
- evidence:{expert:'חוות דעת שמאי/אינסטלטור',photos:'תמונות/וידאו',inspection:'דוח בדק בית',chat:'התכתבויות',policy:'פוליסה',denial:'מכתב דחייה'}
+ against:{insurer:'חברת הביטוח שלי',neighbor:'שכן / צד שלישי',building:'צנרת / רכוש משותף בבניין',unsure:'לא בטוח'},
+ scope:{low:'עד 10,000 ₪',mid:'10,000–50,000 ₪',high:'מעל 50,000 ₪',unknown:'עדיין לא ידוע'}
 };
 var steps=[].slice.call(document.querySelectorAll('.step'));
+var QCOUNT=4;
 var cur=0;
-function showStep(i){steps.forEach(function(s,n){s.classList.toggle('active',n===i);});document.getElementById('wizStep').textContent=(i+1);document.getElementById('wizFill').style.width=((i)/(steps.length-1)*100)+'%';document.getElementById('backBtn').style.visibility=i===0?'hidden':'visible';document.getElementById('nextBtn').textContent=(i===steps.length-1)?'קבלו תוצאה ✓':'המשך ←';document.getElementById('wizErr').textContent='';}
+function showStep(i){
+  steps.forEach(function(s,n){s.classList.toggle('active',n===i);});
+  var meta=document.getElementById('wizMeta');
+  if(i<QCOUNT){meta.innerHTML='שאלה <b id="wizStep">'+(i+1)+'</b> מתוך '+QCOUNT;}
+  else{meta.innerHTML='פרטים אחרונים';}
+  document.getElementById('wizFill').style.width=((i)/(steps.length-1)*100)+'%';
+  document.getElementById('backBtn').style.visibility=i===0?'hidden':'visible';
+  document.getElementById('nextBtn').textContent=(i===steps.length-1)?'קבלו את התוצאה ✓':'המשך ←';
+  document.getElementById('wizErr').textContent='';
+}
 /* chip selection */
 document.querySelectorAll('.opts').forEach(function(box){
-  var single=box.getAttribute('data-single'), multi=box.getAttribute('data-multi');
+  var single=box.getAttribute('data-single');
   box.querySelectorAll('.chip').forEach(function(chip){
     chip.addEventListener('click',function(){
       var v=chip.getAttribute('data-val');
       if(single){box.querySelectorAll('.chip').forEach(function(c){c.classList.remove('active');});chip.classList.add('active');state[single]=v;}
-      else if(multi){var arr=state[multi];var idx=arr.indexOf(v);if(idx>-1){arr.splice(idx,1);chip.classList.remove('active');}else{arr.push(v);chip.classList.add('active');}}
     });
   });
 });
-/* files */
-var fi=document.getElementById('f-files');
-if(fi){fi.addEventListener('change',function(){pickedFiles=[].slice.call(fi.files).map(function(f){return f.name;});document.getElementById('fileList').innerHTML=pickedFiles.map(function(n){return '<li>'+n+'</li>';}).join('');});}
+/* audience deep-link */
+function startWizard(role){
+  state.role=role;
+  var box=document.querySelector('[data-single="role"]');
+  if(box){box.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('active',c.getAttribute('data-val')===role);});}
+  cur=1; showStep(1);
+  var t=document.getElementById('tool'); if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+}
 /* nav */
 document.getElementById('nextBtn').addEventListener('click',function(){
-  var t=steps[cur].getAttribute('data-type');
-  if(steps[cur].getAttribute('data-step')==='1'&&!state.role){document.getElementById('wizErr').textContent='בחרו אפשרות כדי להמשיך';return;}
-  if(steps[cur].getAttribute('data-step')==='7'){var nm=document.getElementById('f-name').value.trim();var ph=document.getElementById('f-phone').value.trim();if(!nm||!ph){document.getElementById('wizErr').textContent='נא למלא שם וטלפון';return;}}
+  var ds=steps[cur].getAttribute('data-step');
+  if(ds==='1'&&!state.role){document.getElementById('wizErr').textContent='בחרו אפשרות כדי להמשיך';return;}
+  if(steps[cur].getAttribute('data-type')==='details'){var nm=document.getElementById('f-name').value.trim();var ph=document.getElementById('f-phone').value.trim();if(!nm||!ph){document.getElementById('wizErr').textContent='נא למלא שם וטלפון';return;}}
   if(cur<steps.length-1){cur++;showStep(cur);}else{submit();}
 });
 document.getElementById('backBtn').addEventListener('click',function(){if(cur>0){cur--;showStep(cur);}});
@@ -644,55 +895,51 @@ document.getElementById('backBtn').addEventListener('click',function(){if(cur>0)
 var FEE={
  warn:{n:'מכתב התראה',a:'1,500 ₪ + מע״מ'},
  order:{n:'תביעה לצו עשה',a:'7,950 ₪ + מע״מ'},
- money:{n:'תביעה כספית (פתיחת תיק)',a:'3,750 ₪ + מע״מ + 15% מהפסוק'}
+ money:{n:'תביעה כספית (פתיחת תיק)',a:'3,750 ₪ + מע״מ'}
 };
 function computeRoute(){
  var s=state, r={badge:'',title:'',text:'',fees:[],reasons:[]};
  var forumThird = (s.against==='building') ? 'אצל המפקח על המקרקעין' : 'בבית משפט השלום';
  if(s.role==='mazik'){
    r.badge='ייצוג בהגנה'; r.title='הגנה מול דרישה בנזקי מים';
-   r.text='אנו מייצגים גם את הצד שמואשם. נבחן את האחריות לגופה, נפעיל את פוליסת הביטוח שלכם אם קיימת, וננהל הגנה מסודרת — מול מכתב התראה, תביעה לצו עשה או תביעה כספית.';
+   r.text='אנו מייצגים גם את הצד שקיבל דרישה או תביעה. נבחן את האחריות לגופה, נפעיל את פוליסת הביטוח שלכם אם קיימת, וננהל הגנה מסודרת — מול מכתב התראה, תביעה לצו עשה או תביעה כספית.';
    r.fees=[{n:'מכתב מענה / התראה',a:'1,500 ₪ + מע״מ'}];
-   r.reasons.push('כצד הנתבע, בחינת האחריות וגבולותיה והפעלת הביטוח שלכם עשויות לצמצם או לשלול את החבות.');
+   r.reasons.push('כצד שקיבל דרישה, בחינת האחריות וגבולותיה והפעלת הביטוח שלכם עשויות לצמצם או לשלול את החבות.');
  } else if(s.active==='active'){
    r.badge='נזק פעיל — מסלול דחוף';
    r.title=(s.against==='insurer')?'עצירת הנזק + תביעת ביטוח':'צו עשה דחוף לעצירת הנזק';
    r.text='הנזק עדיין פעיל, ולכן הצעד הראשון הוא עצירתו: מכתב התראה הדורש תיקון מיידי, ואם אין מענה — תביעה לצו עשה '+forumThird+'. במקביל נתעד את הנזק לצורך תביעה כספית להשבת ההפסד.';
    r.fees=[FEE.warn,FEE.order];
-   if(s.against==='insurer'||s.insurance==='mine') r.fees.push(FEE.money);
+   if(s.against==='insurer') r.fees.push(FEE.money);
    r.reasons.push('נזק פעיל מחייב פעולה מהירה — צו עשה לעצירת הנזק מונע את החמרתו ואת גידול הפיצוי הנדרש.');
- } else if(s.against==='insurer'||s.insurance==='mine'){
+ } else if(s.against==='insurer'){
    r.badge='תביעת ביטוח'; r.title='תביעה כספית מול חברת הביטוח';
    r.text='נזקי המים מכוסים לכאורה בפוליסה. נדרוש את מלוא התגמול מהמבטחת, ובמקרה של דחייה או תשלום חלקי נגיש תביעה כספית. הצעד הראשון הוא מכתב דרישה מנומק.';
    r.fees=[FEE.warn,FEE.money];
  } else if(s.against==='neighbor'||s.against==='building'){
    r.badge=(s.against==='building')?'בית משותף':'צד שלישי';
    r.title=(s.against==='building')?'תביעה נגד האחראי בבית המשותף':'תביעה כספית נגד הצד האחראי';
-   r.text='הנזילה מקורה בצד אחר. ניתן לתבוע אותו '+((s.insurance==='other')?'ואת מבטחו ':'')+'להשבת מלוא הנזק בעוולת רשלנות ומטרד, '+forumThird+'. הצעד הראשון הוא מכתב התראה.';
+   r.text='הנזילה מקורה בצד אחר. ניתן לתבוע אותו להשבת מלוא הנזק בעוולת רשלנות ומטרד, '+forumThird+'. הצעד הראשון הוא מכתב התראה.';
    r.fees=[FEE.warn,FEE.money];
-   if(s.against==='building'&&(s.issues.indexOf('refuse')>-1||s.active==='stopped')) r.fees.splice(1,0,FEE.order);
+   if(s.against==='building'&&s.active==='stopped') r.fees.splice(1,0,FEE.order);
  } else {
    r.badge='בדיקה ממוקדת'; r.title='נדרשת בחינה פרטנית לקביעת המסלול';
    r.text='מהתשובות עולה שכדאי לבחון את התמונה לעומק: ייתכן מסלול תביעת ביטוח, תביעה נגד צד שלישי, או צו עשה. בדיקה קצרה של המסמכים תקבע את המסלול המדויק.';
    r.fees=[FEE.warn,FEE.money];
  }
  /* shared reasons */
- if(s.against==='insurer'||s.issues.indexOf('denied')>-1||s.issues.indexOf('partial')>-1) r.reasons.push('דחייה או תשלום חלקי של המבטחת נבחנים מול נוסח הפוליסה, חובת תום הלב וחובת ההנמקה (חוק חוזה הביטוח, התשמ״א-1981).');
+ if(s.against==='insurer') r.reasons.push('דחייה או תשלום חלקי של המבטחת נבחנים מול נוסח הפוליסה, חובת תום הלב וחובת ההנמקה (חוק חוזה הביטוח, התשמ״א-1981).');
  if(s.against==='neighbor') r.reasons.push('נזק שמקורו אצל שכן או צד שלישי מקים עילה בעוולת רשלנות ומטרד (פקודת הנזיקין), בין אם יש לו ביטוח ובין אם לא.');
  if(s.against==='building') r.reasons.push('בבית משותף, סכסוכי נזילה וצנרת משותפת נתונים לסמכות המפקח על המקרקעין (חוק המקרקעין, התשכ״ט-1969), המוסמך ליתן צו עשה.');
- if(s.insurance==='mine') r.reasons.push('קיומה של פוליסת מבנה או תכולה פותח מסלול תביעה ישיר מול המבטחת שלכם.');
- if(s.insurance==='none'&&s.against==='neighbor') r.reasons.push('היעדר ביטוח אצל האחראי אינו פוטר אותו — ניתן לתבוע אותו באופן אישי.');
- if(s.issues.indexOf('mold')>-1||s.issues.indexOf('damp')>-1) r.reasons.push('רטיבות ועובש הם נזק מתמשך הפוגע במבנה ובבריאות — ביסוסם בחוות דעת מחזק את התביעה.');
- if(s.issues.indexOf('contents')>-1) r.reasons.push('נזק לתכולה הוא ראש נזק נפרד הניתן לתביעה בנוסף לנזק המבנה.');
- if(s.evidence.length) r.reasons.push('יש תיעוד תומך ('+s.evidence.map(function(e){return labels.evidence[e];}).join(', ')+') — המחזק את יכולת ההוכחה.');
- r.reasons.push('מומלץ לבסס את הנזק ואת מקורו בחוות דעת שמאי או אינסטלטור — ראיה מרכזית בתיק.');
+ if(s.scope==='high') r.reasons.push('בהיקף נזק משמעותי חשוב במיוחד לבסס את הנזק בחוות דעת שמאי — ראיה מרכזית הקובעת את גובה הפיצוי.');
+ r.reasons.push('מומלץ לבסס את הנזק ואת מקורו בחוות דעת שמאי או מאתר נזילות — ראיה מרכזית בתיק.');
  return r;
 }
 
 /* ===== LEAD EMAIL (web3forms) ===== */
 var WEB3_KEY="8abbf27b-3d72-49f2-9bd2-bd74ac2b0042";
 function sendLeadEmail(subject,body){if(!WEB3_KEY)return false;try{fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({access_key:WEB3_KEY,subject:subject,from_name:"ליד מהאתר — נזקי צנרת ומים",message:body})});return true;}catch(e){return false;}}
-var SUBJ='פנייה — בדיקת מסלול נזקי מים/צנרת';
+var SUBJ='פנייה — בדיקת התאמה נזקי מים/צנרת';
 
 function submit(){
  var name=document.getElementById('f-name').value.trim(), phone=document.getElementById('f-phone').value.trim();
@@ -701,20 +948,17 @@ function submit(){
  document.getElementById('v-title').textContent=r.title;
  document.getElementById('v-text').textContent=r.text;
  var fb=document.getElementById('v-fees');
- fb.innerHTML='<b>שכר טרחה למסלול:</b>'+r.fees.map(function(f){return '<div class="fl"><span>'+f.n+'</span><b>'+f.a+'</b></div>';}).join('')+'<div class="fl" style="border-top:1px dashed var(--line);margin-top:4px"><span>* בתביעה כספית</span><b>15% + מע״מ מהסכום הפסוק (לא פחות)</b></div>';
+ fb.innerHTML='<b>שכר טרחה למסלול:</b>'+r.fees.map(function(f){return '<div class="fl"><span>'+f.n+'</span><b>'+f.a+'</b></div>';}).join('')+'<div class="fl" style="border-top:1px dashed var(--line);margin-top:4px"><span>* בתביעה כספית</span><b>בנוסף — שכר טרחה מותנה בתוצאה</b></div>';
  var re=document.getElementById('v-reasons');re.innerHTML='';
- r.reasons.forEach(function(rs){var li=document.createElement('li');li.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg><span>'+rs+'</span>';re.appendChild(li);});
+ r.reasons.forEach(function(rs){var li=document.createElement('li');li.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg><span>'+rs+'</span>';re.appendChild(li);});
 
  var msg=SUBJ+'\n';
  msg+='שם: '+name+'\nטלפון: '+phone+'\n';
  var addr=document.getElementById('f-addr').value.trim(); if(addr) msg+='כתובת: '+addr+'\n';
- msg+='תפקיד: '+(labels.role[state.role]||'לא צוין')+'\n';
- msg+='מול מי: '+(labels.against[state.against]||'לא צוין')+'\n';
+ msg+='מצב: '+(labels.role[state.role]||'לא צוין')+'\n';
  msg+='מצב הנזק: '+(labels.active[state.active]||'לא צוין')+'\n';
- msg+='ביטוח: '+(labels.insurance[state.insurance]||'לא צוין')+'\n';
- if(state.issues.length) msg+='מה קרה: '+state.issues.map(function(i){return labels.issues[i];}).join(', ')+'\n';
- if(state.evidence.length) msg+='ראיות: '+state.evidence.map(function(e){return labels.evidence[e];}).join(', ')+'\n';
- if(pickedFiles.length) msg+='מסמכים: '+pickedFiles.join(', ')+'\n';
+ msg+='מקור הנזילה: '+(labels.against[state.against]||'לא צוין')+'\n';
+ msg+='היקף משוער: '+(labels.scope[state.scope]||'לא צוין')+'\n';
  var desc=document.getElementById('f-desc').value.trim(); if(desc) msg+='תיאור: '+desc+'\n';
  msg+='--\nמסלול מומלץ: '+r.title+'\n';
 
@@ -725,7 +969,7 @@ function submit(){
  document.getElementById('wizStage').style.display='none';
  document.getElementById('wizNav').style.display='none';
  document.getElementById('wizFill').style.width='100%';
- document.getElementById('wizStep').textContent='✓';
+ document.getElementById('wizMeta').innerHTML='הושלם ✓';
  document.getElementById('result').style.display='block';
  document.getElementById('tool').scrollIntoView({behavior:'smooth',block:'start'});
 }
