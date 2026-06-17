@@ -494,6 +494,15 @@
   .stepflow .sf{background:#fff;border:2px solid var(--ink);border-radius:999px;padding:9px 16px;font-weight:800;font-size:14px}
   .stepflow .ar{font-weight:900;font-size:20px}
   .water-illo{width:100%;max-width:380px;margin:0 auto;display:block}
+  /* ===== GRID CONSISTENCY ===== */
+  .dgrid,.feegrid{gap:20px;align-items:stretch}
+  .dgrid .ditem{display:flex;flex-direction:column;height:100%}
+  .dgrid .ditem p{flex:1}
+  .feegrid .feecard{height:100%}
+  .feegrid .feecard p{flex:1}
+  .sec-head{margin-bottom:42px}
+  .ditem,.feecard{padding:30px 26px}
+  .proc-num-grid .ditem .dnum{font-size:34px;font-family:'Secular One';color:var(--orange)}
 </style>
 </head>
 <body>
@@ -601,9 +610,10 @@
       <div class="txt"><span class="lbl">מסלול הפעולה</span><h2 class="disp">נזק פעיל? קודם עוצרים, אחר כך גובים</h2>
         <p>כשהמים עדיין זורמים, כל יום מגדיל את הנזק. לכן הסדר נכון: תחילה צו עשה לעצירת הנזק, ובמקביל או לאחריו — תביעה כספית להשבת ההפסד. בשני המסלולים הצעד הראשון הוא מכתב התראה.</p></div>
     </div>
-    <div class="proc">
-      <div class="proc-step reveal"><div class="pstep">01</div><h3>מכתב התראה</h3><p>פנייה משפטית מנומקת אל האחראי או אל המבטחת, הדורשת תיקון מיידי או תשלום, וקוצבת זמן לפעולה. פעמים רבות מכתב כזה פותר את הסכסוך בלי הליך.</p><span class="pc">הצעד הראשון בכל מסלול</span></div>
-      <div class="proc-step s2 reveal"><div class="pstep">02</div><h3>אם לא נענו — תביעה</h3><p>כשההתראה אינה מביאה לתוצאה, מגישים את התביעה המתאימה: צו עשה אצל המפקח על המקרקעין לעצירת נזק פעיל, או תביעה כספית בבית משפט השלום להשבת הנזק.</p><span class="pc">צו עשה או תביעה כספית</span></div>
+    <div class="dgrid proc-num-grid">
+      <div class="ditem reveal"><div class="dnum">01</div><h3>זיהוי הבעיה והאחראי</h3><p>בודקים את מקור הנזילה, מי אחראי לה ומול מי לפעול — חברת הביטוח, השכן או הרכוש המשותף — וקובעים את המסלול הנכון מההתחלה.</p></div>
+      <div class="ditem reveal"><div class="dnum">02</div><h3>מכתב התראה</h3><p>פנייה משפטית מנומקת הדורשת תיקון מיידי או תשלום וקוצבת זמן לפעולה. פעמים רבות פותרת את הסכסוך עוד לפני הגשת תביעה.</p></div>
+      <div class="ditem reveal"><div class="dnum">03</div><h3>צו עשה או תביעה כספית</h3><p>אם אין מענה — תביעה לצו עשה אצל המפקח על המקרקעין לעצירת נזק פעיל, או תביעה כספית בבית משפט השלום להשבת מלוא ההפסד.</p></div>
     </div>
     <div class="reveal" style="margin-top:26px">
       <div class="stepflow"><span class="sf">זיהוי הבעיה והאחראי</span><span class="ar">←</span><span class="sf">מכתב התראה</span><span class="ar">←</span><span class="sf">צו עשה לעצירת הנזק</span><span class="ar">←</span><span class="sf">תביעה כספית להשבה</span></div>
