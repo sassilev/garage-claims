@@ -318,6 +318,19 @@
   .why-list .wi{color:var(--cyan-d);flex:none;margin-top:2px}
   .why-list b{color:var(--navy)}
 
+  /* breadcrumb */
+  .crumb{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;margin-bottom:16px;flex-wrap:wrap}
+  .crumb a{color:var(--cyan-d)}
+  .crumb a:hover{color:var(--gold-d)}
+  .crumb .sep{color:var(--gold-d)}
+  .crumb [aria-current]{color:var(--muted);font-weight:500}
+
+  /* long-form guide */
+  .guide{max-width:860px}
+  .guide h3{font-size:clamp(19px,2.4vw,23px);margin:clamp(26px,3.2vw,36px) 0 10px}
+  .guide h3:first-of-type{margin-top:0}
+  .guide p{color:var(--muted);font-size:16.5px;margin-bottom:6px}
+
   /* FAQ */
   .faq{max-width:920px}
   .faq-item{border-bottom:1px solid rgba(255,255,255,.16)}
@@ -458,6 +471,11 @@
   <div class="hero-scrim"></div>
   <div class="wrap">
     <div class="hero-copy">
+      <nav class="crumb reveal" aria-label="פירורי לחם">
+        <a href="https://www.lev-lawfirm.com/">בית</a>
+        <span class="sep" aria-hidden="true">‹</span>
+        <span aria-current="page">נזקי מים וצנרת</span>
+      </nav>
       <div class="hero-eyebrow reveal">נזקי מים · נזילות צנרת · תביעות ביטוח</div>
       <h1 class="reveal">נזק מים בדירה? קודם עוצרים את הנזק, <span class="gold">אחר כך דורשים את הפיצוי.</span></h1>
       <p class="lead reveal">נזילה מהשכן, רטיבות מצנרת משותפת או דחייה של חברת הביטוח מחייבות פעולה מהירה ובחירת המסלול המשפטי הנכון. עו״ד ששי לב מייצג בתביעות נזקי מים, ביטוח ונזקי רכוש — מכתבי התראה, תביעות כספיות וצווי עשה לעצירת נזק פעיל.</p>
@@ -830,6 +848,31 @@
       </table>
     </div>
     <p class="lnote reveal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>אנחנו עובדים עם שמאים, מאתרי נזילות ומהנדסים — ודואגים שחוות הדעת תיערך נכון ובזמן, לפני שהראיות נעלמות.</span></p>
+  </div>
+</section>
+
+<!-- GUIDE (long-form SEO content) -->
+<section class="sec bg-grey" id="guide">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-head-t"><span class="eyebrow">מדריך מורחב</span><h2 class="sec-title">נזקי מים וצנרת — כל מה שצריך לדעת לפני שתובעים</h2><p class="sec-sub">המצבים הנפוצים בנזקי מים ונזילות צנרת, והמסלול המשפטי המתאים לכל אחד.</p></div>
+    </div>
+    <div class="guide reveal">
+      <h3>נזילת צנרת בבית משותף — מי אחראי ומול מי לפעול?</h3>
+      <p>כשהנזילה מקורה בצנרת משותפת או בדירת שכן בבית משותף, אפשר לפנות אל המפקח על המקרקעין בבקשה לצו עשה — חיוב האחראי לתקן ולעצור את הנזק — מכוח <span class="lawref">חוק המקרקעין, התשכ״ט-1969</span>. במצבים אחרים תובעים את השכן בעוולת רשלנות ומטרד. זיהוי מדויק של מקור הנזילה, לרוב באמצעות מאתר נזילות, הוא שקובע מול מי נכון לפעול ובאיזה מסלול.</p>
+
+      <h3>רטיבות בקיר או בתקרה מהשכן — הצעדים הראשונים</h3>
+      <p>רטיבות חוזרת היא נזק מתמשך הפוגע במבנה ולעיתים בבריאות. הצעדים הראשונים: לתעד את הנזק בתמונות ובווידאו, להזמין חוות דעת מקצועית לאיתור המקור, ולשלוח מכתב התראה מנומק לאחראי או למבטחת הדורש תיקון תוך זמן קצוב. תיעוד מוקדם מחזק את התיק לפני שהראיות נחלשות.</p>
+
+      <h3>דחיית תביעת ביטוח בנזקי מים — איך מתמודדים?</h3>
+      <p>דחייה אינה סוף הדרך. בוחנים את עילת הדחייה מול נוסח הפוליסה וההחרגות, ומול חובות המבטח לפי <span class="lawref">חוק חוזה הביטוח, התשמ״א-1981</span> — לרבות חובת תום הלב וחובת ההנמקה. במקרים רבים אפשר להגיש תביעה כספית ולדרוש את מלוא התגמול, ולעיתים אף ריבית מיוחדת בגין אי-תשלום בתום לב. כל מקרה נבחן לגופו.</p>
+
+      <h3>נזק מים פעיל — למה צו עשה קודם לתביעה הכספית?</h3>
+      <p>כשהמים עדיין זורמים, כל יום מגדיל את הנזק. לכן הסדר הנכון הוא קודם לעצור: מכתב התראה לתיקון מיידי, ואם אין מענה — תביעה לצו עשה. במקביל מתעדים את הנזק לצורך תביעה כספית להשבת ההפסד. פעולה בשני המסלולים יחד מונעת החמרה ומחזקת את הדרישה.</p>
+
+      <h3>כמה זמן יש לפעול? התיישנות וראיות</h3>
+      <p>לתביעות קבוע מועד התיישנות, והזמן פועל גם על הראיות — רטיבות מתפשטת, מסמכים אובדים וזיכרונות מיטשטשים. ככל שפונים מוקדם יותר, כך קל יותר לבסס את מקור הנזק ואת היקפו. מומלץ לבדוק את לוח הזמנים החל מקרות הנזק לפני שמתקדמים בהליך.</p>
+    </div>
   </div>
 </section>
 
